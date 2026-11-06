@@ -1,0 +1,839 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>售后绩效管理 V1.1 评审原型</title><style>:root{--primary:#165dff;--primary-light:#e8f3ff;--ink:#1d2129;--sub:#4e5969;--muted:#86909c;--line:#e5e6eb;--page:#f7f8fa;--fill:#f2f3f5;--good:#009a29;--orange:#d25f00;--red:#cb2634}*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.48}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #94bfff;outline-offset:2px}a{color:var(--primary)}.reviewbar{height:46px;background:#18213a;color:#dce4f5;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:12px;gap:12px}.reviewbar b{color:white;font-size:13px}.system-tabs{display:flex;gap:3px}.system-tabs button{background:transparent;color:#c2ccdf;border:0;padding:8px 17px;border-radius:5px}.system-tabs button.on{background:#344362;color:white}.review-actions{display:flex;gap:16px}.review-actions button{border:0;background:transparent;color:#dce4f5;padding:0}.platform-header{height:72px;background:white;display:flex;align-items:center;padding:0 24px;border-bottom:1px solid var(--line);gap:18px}.brand-mark{width:40px;height:40px;border-radius:50%;background:#1b2142;color:white;font-size:24px;text-align:center;line-height:40px}.brand{font-size:22px;letter-spacing:1px;font-weight:600;white-space:nowrap}.breadcrumb{color:var(--sub);font-size:13px;margin-left:24px}.header-right{margin-left:auto;display:flex;align-items:center;gap:12px}.header-right label{font-size:12px;color:var(--sub)}.header-right select{width:152px;background:var(--page)}.shell{display:flex;min-height:calc(100vh - 118px)}.sidebar{width:218px;flex-shrink:0;background:white;padding:22px 16px}.menu-head{color:var(--sub);font-size:15px;padding:12px 16px}.menu-head.active{color:var(--ink);font-weight:600;margin-top:6px}.sidebar button{display:block;width:100%;border:0;background:none;text-align:left;color:var(--sub);padding:12px 16px 12px 34px;font-size:14px;margin:4px 0;border-radius:4px}.sidebar button.on{color:var(--primary);background:var(--primary-light);font-weight:500}.workspace{padding:24px;flex:1;min-width:0}.page-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:16px}.page-top h1{font-size:22px;line-height:1.4;margin:0 0 4px;font-weight:600}.page-top p{margin:0;color:var(--muted);font-size:13px}.btn{border:1px solid var(--line);background:white;border-radius:4px;height:36px;padding:0 16px;color:var(--sub);white-space:nowrap}.btn.primary{background:var(--primary);border-color:var(--primary);color:white}.btn.danger{color:var(--red);border-color:#f5c2c3}.btn.weak{border-color:transparent;background:var(--fill)}.btn.small{height:30px;padding:0 10px;font-size:12px}.text-btn{border:0;background:transparent;color:var(--primary);padding:4px 0;white-space:nowrap;font-size:13px}.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.panel{background:white;border:1px solid #edf0f4;border-radius:8px;padding:22px;margin-bottom:20px}.panel-title{font-size:16px;font-weight:600;margin:0 0 18px;display:flex;align-items:center;gap:8px}.panel-title:before{content:'';display:inline-block;width:4px;height:17px;background:var(--primary);border-radius:3px}.filters{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:16px 24px}.field label{display:block;color:var(--sub);font-size:13px;margin-bottom:7px}.field input,.field select,.field textarea,select,input[type=text],input[type=month],input[type=number],textarea{height:36px;border:1px solid var(--line);border-radius:4px;padding:0 10px;color:var(--ink);background:white;max-width:100%}.field input,.field select,.field textarea{width:100%}.field textarea,textarea{height:90px;padding:10px;resize:vertical}.filter-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:18px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}.stat{background:white;border:1px solid var(--line);border-radius:8px;padding:22px}.stat strong{display:block;font-size:30px;font-weight:600;line-height:1.3;margin:10px 0 8px}.stat span{color:var(--sub);font-size:13px}.stat small{color:var(--muted)}.stat .orange{color:var(--orange)}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:13px}th{text-align:left;background:#f2f3f5;color:var(--sub);font-weight:500;padding:13px 12px}td{padding:15px 12px;border-bottom:1px solid #eef0f3}td.wrap,th.wrap{white-space:normal;min-width:150px;max-width:400px}tr:last-child td{border-bottom:0}td small{display:block;color:var(--muted);margin-top:3px}.tag{font-size:12px;display:inline-flex;align-items:center;border-radius:3px;padding:3px 8px;white-space:nowrap;background:var(--fill);color:var(--sub)}.tag.blue{color:var(--primary);background:var(--primary-light)}.tag.green{color:var(--good);background:#e8ffea}.tag.orange{color:var(--orange);background:#fff7e8}.tag.red{color:var(--red);background:#ffece8}.tag.gray{color:var(--muted)}.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;flex-wrap:wrap}.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:20px}.tabs button{padding:10px 16px;border:0;border-bottom:2px solid transparent;background:none;color:var(--sub)}.tabs button.on{color:var(--primary);border-bottom-color:var(--primary)}.notice{background:var(--primary-light);color:#31538a;border-radius:4px;padding:11px 14px;font-size:13px;margin-bottom:16px}.notice.warn{background:#fff7e8;color:#8f5315}.muted{color:var(--muted)}.sub{color:var(--sub)}.tiny{font-size:12px}.empty{text-align:center;padding:55px;color:var(--muted)}.pagination{display:flex;justify-content:flex-end;align-items:center;gap:14px;padding-top:18px;color:var(--muted);font-size:13px}.pagination span.page{background:var(--primary-light);color:var(--primary);padding:4px 10px}.two-col{display:grid;grid-template-columns:1.5fr 1fr;gap:20px}.key-values{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.key-values small{display:block;color:var(--muted);margin-bottom:5px}.steps{display:flex;align-items:flex-start;justify-content:space-between;padding:8px 0 22px;gap:8px}.step{flex:1;position:relative;text-align:center;color:var(--muted);font-size:12px}.step:before{content:'';position:absolute;height:1px;background:var(--line);top:15px;left:55%;width:90%}.step:last-child:before{display:none}.step i{display:block;font-style:normal;border:1px solid var(--line);background:white;width:30px;height:30px;line-height:28px;border-radius:50%;margin:auto auto 8px;position:relative;z-index:1}.step.done i{background:var(--primary);color:white;border-color:var(--primary)}.step.current i{color:var(--primary);border-color:var(--primary);background:var(--primary-light)}.step.done,.step.current{color:var(--ink)}.progress{height:6px;background:#e8edf5;border-radius:3px;min-width:70px;overflow:hidden}.progress i{display:block;height:100%;background:var(--primary);border-radius:3px}.progress.orange i{background:#ff7d00}.data-number{font-variant-numeric:tabular-nums}.drawer-mask{position:fixed;inset:0;background:#17233d52;z-index:20;display:flex;justify-content:flex-end}.drawer{width:760px;max-width:96vw;height:100%;background:white;box-shadow:-8px 0 30px #152c4a12;display:flex;flex-direction:column}.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;border-bottom:1px solid var(--line)}.drawer-head h2{font-size:20px;margin:0}.close{background:none;border:0;font-size:23px;color:var(--muted);padding:4px 8px}.drawer-body{padding:24px;overflow:auto;flex:1}.drawer-foot{padding:16px 24px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:12px;background:white}.drawer h3{font-size:15px;margin:22px 0 12px}.drawer .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.error{color:var(--red);font-size:13px;min-height:20px;margin-top:10px}.toast{position:fixed;top:65px;left:50%;transform:translateX(-50%);padding:13px 22px;border-radius:6px;background:#1d2129eb;color:white;z-index:80;box-shadow:0 4px 20px #0002}.note-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.note-grid article{padding:16px;background:var(--page);border-radius:6px}.note-grid h4{margin:0 0 8px}.note-grid p{font-size:13px;line-height:1.7;margin:0}.timeline{margin:12px 0}.timeline div{border-left:2px solid #e8edf5;padding:0 0 18px 16px;position:relative}.timeline div:before{content:'';position:absolute;width:8px;height:8px;border:2px solid var(--primary);border-radius:50%;background:white;left:-5px;top:5px}.timeline b{font-size:13px}.timeline small{display:block;color:var(--muted);margin-top:3px}.mobile-stage{display:flex;justify-content:center;align-items:flex-start;gap:42px;padding:32px 24px}.phone{width:393px;max-width:100%;height:815px;background:var(--page);border:1px solid #d8dee8;border-radius:28px;box-shadow:0 14px 40px #14234710;overflow:hidden;display:flex;flex-direction:column}.phone-status{height:30px;background:white;display:flex;align-items:center;justify-content:space-between;padding:0 22px;font-size:11px}.phone-nav{height:50px;flex-shrink:0;background:white;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 16px}.phone-nav h2{font-size:17px;margin:0;font-weight:500}.phone-nav button{border:0;background:transparent;padding:7px 2px;font-size:14px;color:var(--sub)}.phone-content{overflow:auto;flex:1;min-height:0;padding:16px}.phone-tabs{display:flex;background:white;border-top:1px solid var(--line);padding:5px 0 10px;flex-shrink:0}.phone-tabs button{flex:1;border:0;background:none;font-size:13px;padding:9px 0;color:var(--muted)}.phone-tabs button.on{color:var(--primary);font-weight:500}.mobile-card{background:white;border-radius:8px;padding:16px;margin-bottom:12px}.mobile-card h3{font-size:16px;margin:0 0 12px;font-weight:500}.mobile-card p{font-size:14px;margin:8px 0}.mobile-card .row{display:flex;justify-content:space-between;gap:12px;align-items:center}.mobile-card .row+ .row{margin-top:10px}.mobile-card .metric-title{font-size:14px;font-weight:500}.mobile-card .big{font-size:24px;font-weight:600;line-height:1.4}.mobile-card hr{border:0;border-top:1px solid #f0f1f3;margin:14px 0}.phone .notice{font-size:12px;line-height:1.6}.phone .btn{height:42px;font-size:15px}.phone .wide{width:100%}.phone .fixed-action{background:white;border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:10px;flex-shrink:0}.phone .fixed-action .btn{flex:1}.phone .field{margin-bottom:16px}.phone .field label{font-size:14px}.phone .field input,.phone .field select{height:42px}.phone .field textarea{height:110px}.mobile-note{width:350px;padding-top:16px}.mobile-note h1{font-size:24px;margin:0 0 8px}.mobile-note>p{color:var(--sub);line-height:1.8}.mobile-note .panel{padding:18px}.list-link{display:flex;width:100%;justify-content:space-between;text-align:left;background:white;border:0;padding:14px 0;color:var(--ink);font-size:14px;border-bottom:1px solid var(--line)}.list-link small{display:block;color:var(--muted);font-size:12px;margin-top:5px}.list-link:last-child{border:0}.cell-value{color:var(--sub)}.feishu-stage{max-width:1050px;margin:0 auto;padding:34px 24px;display:grid;grid-template-columns:1.2fr 1fr;gap:28px}.chat-window{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#f3f5f8}.chat-head{background:white;padding:20px 24px;border-bottom:1px solid var(--line)}.chat-head b{font-size:16px}.chat-body{padding:28px}.chat-meta{font-size:12px;color:var(--muted);text-align:center;margin-bottom:24px}.message{background:white;border:1px solid #dee5ee;border-radius:8px;overflow:hidden}.message-header{background:#fff4e5;color:#8f5315;padding:17px 20px;font-weight:600;font-size:16px}.message-body{padding:20px;font-size:14px}.message-body p{margin:0 0 14px}.message .btn{width:100%;margin-top:10px}.explain h2{font-size:18px;margin-top:4px}.explain p{font-size:14px;line-height:1.8;color:var(--sub)}.code-label{font-size:12px;color:var(--muted);letter-spacing:1px}.section-heading{margin:0 0 14px;font-size:16px}.chip-radio{display:flex;gap:8px;flex-wrap:wrap}.chip-radio button{border:1px solid var(--line);background:white;padding:7px 12px;border-radius:4px;color:var(--sub)}.chip-radio button.on{border-color:#bedaff;background:var(--primary-light);color:var(--primary)}.field-table td{white-space:normal;vertical-align:top}.field-table th{font-size:12px}.field-table td:first-child{min-width:90px}.field-table td:last-child{min-width:220px}.readonly{padding:12px 14px;background:var(--page);border-radius:4px;color:var(--sub)}@media(max-width:1200px){.brand{font-size:18px}.breadcrumb{margin-left:0}.platform-header{gap:12px}.filters{grid-template-columns:repeat(3,1fr)}.sidebar{width:190px}.workspace{padding:18px}.header-right label{display:none}.stats{gap:10px}.stat{padding:16px}.two-col{grid-template-columns:1fr}.mobile-note{width:300px}}@media(max-width:760px){.reviewbar{padding:8px 12px;height:auto;min-height:46px;flex-wrap:wrap}.reviewbar>b{display:none}.system-tabs button{padding:6px 10px}.review-actions{gap:10px}.platform-header{height:56px;padding:0 14px}.brand-mark{width:30px;height:30px;line-height:30px;font-size:19px}.brand{font-size:16px}.breadcrumb{display:none}.header-right select{width:112px;font-size:12px}.sidebar{width:150px;padding:16px 8px}.sidebar button{padding:10px 8px 10px 18px;font-size:12px}.menu-head{font-size:13px;padding:10px 8px}.workspace{padding:12px}.filters{grid-template-columns:repeat(2,minmax(110px,1fr))}.stats{grid-template-columns:1fr 1fr}.page-top h1{font-size:19px}.panel{padding:14px}.page-top{align-items:flex-start}.page-top .actions{max-width:150px;justify-content:flex-end}.mobile-stage{padding:16px 0;display:block}.phone{margin:auto}.mobile-note{display:none}.feishu-stage{display:block;padding:20px 14px}.explain{margin-top:24px}.key-values{grid-template-columns:1fr 1fr}.note-grid{grid-template-columns:1fr}.drawer-body{padding:16px}.drawer .form-grid{grid-template-columns:1fr}.drawer-foot{padding:12px 16px}.field-table{min-width:600px}}@media(max-width:430px){.phone{border:0;border-radius:0;box-shadow:none;width:100%;height:calc(100dvh - 46px)}.mobile-stage{padding:0}.phone-status{display:none}.phone-nav{height:48px}.phone-content{padding:14px}.system-tabs button{font-size:12px}.review-actions button{font-size:11px}.reviewbar{gap:4px}.sidebar{display:none}.stats{gap:8px}.stat strong{font-size:26px}.workspace{width:100%}.platform-header .brand{font-size:14px}.header-right select{width:100px}.reviewbar .review-actions .reset-label{display:none}}
+
+.drawer.drawer-wide{width:1180px}.diagnosis-table table{min-width:1010px}.diagnosis-table th,.diagnosis-table td{white-space:nowrap}
+
+.allocation-table table{min-width:820px}.allocation-table th{white-space:normal;min-width:145px}.allocation-table th:first-child{min-width:125px}.demo-identity{background:#edf0f5;border-radius:5px;padding:10px 12px;margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--sub)}.demo-identity select{height:30px;flex:1;min-width:140px;font-size:12px}.demo-identity small{display:block;width:100%;color:var(--muted);font-size:10px}
+</style></head><body><div id="app"></div><script>window.FIELD_GROUPS={
+  "common": [
+    [
+      "考核年月",
+      "月份 YYYY-MM",
+      "查询条件",
+      "拟默认：方案、执行查询当前月，结果查询上一月；点击查询后生效。"
+    ],
+    [
+      "大区／小区／城市／门店",
+      "四级单选",
+      "拟选填",
+      "按账号授权范围选择；上级变更时清空下级条件。组织映射待定。"
+    ],
+    [
+      "人员姓名／工号",
+      "文本搜索",
+      "拟选填",
+      "拟按姓名模糊匹配、工号精确匹配；限授权范围。"
+    ],
+    [
+      "预警状态",
+      "全部／预警／正常",
+      "拟选填",
+      "默认全部；筛选同时更新列表与人数，不改变全国名次。"
+    ],
+    [
+      "数据截至时间",
+      "日期时间",
+      "只读",
+      "显示数据方提供的业务数据更新时间。"
+    ],
+    [
+      "结果版本",
+      "V加正整数",
+      "只读",
+      "拟在发布、修订时生成；确认、申诉、归档均关联具体版本。"
+    ]
+  ],
+  "rules": [
+    [
+      "指标编码",
+      "文本",
+      "拟必填",
+      "总部维护；拟全局唯一，启用后不修改。"
+    ],
+    [
+      "指标名称",
+      "文本",
+      "拟必填",
+      "总部维护；指标清单待定。"
+    ],
+    [
+      "指标类型",
+      "必选／可选",
+      "拟必填",
+      "总部维护类型，并在月度方案选定指标；门店只读。"
+    ],
+    [
+      "适用岗位",
+      "岗位多选",
+      "拟必填",
+      "岗位字典及人员岗位映射由售后团队确认。"
+    ],
+    [
+      "计量单位",
+      "万元／小时／次等",
+      "拟必填",
+      "与数据来源一致；同一指标使用同一单位。"
+    ],
+    [
+      "业务定义",
+      "多行文本",
+      "拟必填",
+      "定义统计对象、周期、排除项和去重口径，由售后业务与大数据团队确认。"
+    ],
+    [
+      "数据来源及源指标标识",
+      "来源选择＋标识",
+      "拟必填",
+      "关联大数据指标；具体来源及字段映射待对接。"
+    ],
+    [
+      "目标输入规则",
+      "精度／允许范围",
+      "拟必填",
+      "按指标设置精度和允许范围；零目标处理待定。"
+    ],
+    [
+      "评分规则标识",
+      "规则选择／版本",
+      "条件",
+      "计算得分时填写；评分公式与版本待定。"
+    ],
+    [
+      "权重设置规则",
+      "百分数／合计口径",
+      "拟必填",
+      "由总部设置指标权重；门店不可修改。数值边界及合计口径待定。"
+    ],
+    [
+      "指标状态",
+      "草稿／启用／停用",
+      "拟必填",
+      "拟在数据来源、规则完整后启用；停用保留历史引用。"
+    ],
+    [
+      "评价项目及上限",
+      "名称＋数值",
+      "条件",
+      "评价项目、评分人、分值范围及汇总方式待定。"
+    ],
+    [
+      "加扣分事项及依据",
+      "事项／分值／说明",
+      "条件",
+      "拟记录加扣分事项、分值和依据；该类结果不可申诉。"
+    ]
+  ],
+  "schemes": [
+    [
+      "方案编号",
+      "系统生成标识",
+      "只读",
+      "拟由系统生成，用于关联方案及处理记录。"
+    ],
+    [
+      "方案名称",
+      "文本",
+      "拟必填",
+      "总部填写。"
+    ],
+    [
+      "考核年月",
+      "月份",
+      "拟必填",
+      "方案适用月份；历史月份数据分别保留。"
+    ],
+    [
+      "方案版本",
+      "递增版本",
+      "只读",
+      "确认和审批关联方案版本；生效后的变更规则待定。"
+    ],
+    [
+      "适用组织与门店",
+      "组织／门店选择",
+      "拟必填",
+      "在授权组织范围内选择。"
+    ],
+    [
+      "适用岗位",
+      "岗位选择",
+      "拟必填",
+      "关联岗位指标和员工名单；岗位映射由售后团队提供。"
+    ],
+    [
+      "指标选择",
+      "必选固定／可选勾选",
+      "拟必填",
+      "总部保留必选项、选择可选项；门店接收后只读。"
+    ],
+    [
+      "指标权重",
+      "百分数",
+      "拟必填",
+      "总部填写并下发，门店及员工只读。客观指标合计100%为拟定口径；总分规则待定。"
+    ],
+    [
+      "参评人员名单",
+      "工号／姓名／岗位",
+      "拟必填",
+      "在门店拆解页按员工展示适用指标；人员来源、名单变动处理待定。"
+    ],
+    [
+      "个人目标值",
+      "每员工每指标数值／单位",
+      "提交必填",
+      "门店服务总监逐人填写，总部不录入。数值范围见 Q01；门店总目标来源及合计核对见 Q04。"
+    ],
+    [
+      "拆解人／保存时间",
+      "人员／时间",
+      "只读",
+      "记录服务总监保存或提交目标的人员及时间，关联方案版本。"
+    ],
+    [
+      "保存目标草稿",
+      "动作",
+      "条件",
+      "待门店拆解时保存已填内容，允许暂缺目标；不生成员工待办。"
+    ],
+    [
+      "提交员工确认",
+      "动作",
+      "条件",
+      "服务总监补齐每位参评员工的适用指标目标后提交；按员工生成DMS待办。"
+    ],
+    [
+      "员工确认情况",
+      "已确认数／应确认数",
+      "只读",
+      "按同一方案版本统计确认人数。"
+    ],
+    [
+      "逐人确认状态／时间",
+      "员工／状态／时间",
+      "只读",
+      "按员工编号和方案版本记录；某员工确认不改变他人状态。"
+    ],
+    [
+      "方案状态及当前处理角色",
+      "状态／岗位",
+      "只读",
+      "总部下发后进入待门店拆解，门店提交后待员工确认，审批完成后生效。"
+    ],
+    [
+      "操作记录",
+      "角色／动作／时间",
+      "只读",
+      "拟记录指标权重下发、目标拆解、员工确认及审批的操作人、时间和版本。"
+    ]
+  ],
+  "diagnosis": [
+    [
+      "门店编码",
+      "文本",
+      "只读",
+      "关联诊断记录所属门店；保留前导零，来源映射待对接。"
+    ],
+    [
+      "门店名称",
+      "文本",
+      "只读",
+      "与门店编码对应。"
+    ],
+    [
+      "员工姓名",
+      "文本",
+      "只读",
+      "显示员工姓名，以员工编号关联记录。"
+    ],
+    [
+      "员工编号",
+      "文本",
+      "只读",
+      "与现有工号、DMS人员身份的映射待核实。"
+    ],
+    [
+      "指标名称",
+      "文本",
+      "只读",
+      "拟按员工、指标分行展示。"
+    ],
+    [
+      "当月目标",
+      "数值",
+      "只读",
+      "诊断月份的目标值；配置新方案不改写该值。单位按指标定义。"
+    ],
+    [
+      "当月实际",
+      "数值",
+      "只读",
+      "同月、同门店、同员工、同指标的实际值；拟以0表示有效零，以—表示缺失。"
+    ],
+    [
+      "完成率",
+      "百分比",
+      "只读",
+      "拟读取大数据返回值；公式、精度及零目标处理待定。"
+    ],
+    [
+      "完成率排名",
+      "名次",
+      "只读",
+      "排名范围、分组、方向和并列规则待定；与全国预警排名是否复用待定。"
+    ]
+  ],
+  "approvals": [
+    [
+      "待办编号／关联方案",
+      "标识／链接",
+      "只读",
+      "审批任务关联方案及版本。"
+    ],
+    [
+      "当前审批节点",
+      "店长／区域／大区",
+      "只读",
+      "依次为门店店长、区域售后总监、售后大区；同人多角色处理待定。"
+    ],
+    [
+      "员工确认完成情况",
+      "数量／明细",
+      "只读",
+      "拟全员确认后进入店长审批；确认门槛及超时处理待定。"
+    ],
+    [
+      "员工目标明细",
+      "员工／岗位／指标／权重／目标",
+      "只读",
+      "展示总部指标权重、服务总监分配的逐人目标及对应确认记录；审批人不改写目标。"
+    ],
+    [
+      "审批意见",
+      "文本",
+      "拟选填",
+      "拟在通过时选填；退回意见及路径待定。"
+    ],
+    [
+      "审批结论",
+      "通过／退回待定",
+      "操作",
+      "记录本节点处理结论；退回分支待定。"
+    ],
+    [
+      "审批人／审批时间",
+      "人员／时间",
+      "只读",
+      "记录实际处理人及时间。"
+    ]
+  ],
+  "tracking": [
+    [
+      "员工工号／姓名",
+      "文本",
+      "只读",
+      "关联参评员工，保留对应月份的身份信息。"
+    ],
+    [
+      "归属门店／区域／岗位",
+      "组织／岗位",
+      "只读",
+      "展示参评员工所属组织及岗位；来源映射待定。"
+    ],
+    [
+      "指标及单位",
+      "名称／单位",
+      "只读",
+      "与当月生效方案一致。"
+    ],
+    [
+      "本月目标",
+      "数值",
+      "只读",
+      "读取门店服务总监分配给该员工、对应月份及指标的目标；关联方案版本。"
+    ],
+    [
+      "月度累计完成值",
+      "数值",
+      "只读",
+      "大数据提供；拟以0表示有效零，以—表示缺失。"
+    ],
+    [
+      "进度示意",
+      "完成值／目标值",
+      "只读",
+      "展示目标与累计完成情况；进度计算口径待定。"
+    ],
+    [
+      "全国名次",
+      "正整数",
+      "只读",
+      "全国直营门店个人排名；筛选不重算，算法待定。"
+    ],
+    [
+      "全国参评人数",
+      "正整数",
+      "只读",
+      "与名次使用同一批次、同一参评集合。"
+    ],
+    [
+      "后30%标记",
+      "是／否",
+      "只读",
+      "按全国个人排名划定；并列、取整和缺失数据处理待定。"
+    ],
+    [
+      "预警人员数／门店数",
+      "去重计数",
+      "只读",
+      "统计授权及筛选范围内的预警人员，并按所属门店去重。"
+    ],
+    [
+      "统计批次／数据截至时间",
+      "标识／时间",
+      "只读",
+      "用于核对完成值、名次与预警的数据时间。"
+    ]
+  ],
+  "results": [
+    [
+      "结果标识／考核月份",
+      "标识／月份",
+      "只读",
+      "拟按员工、考核月份和结果版本定位。"
+    ],
+    [
+      "人员及组织快照",
+      "工号／门店／岗位",
+      "只读",
+      "保存考核期内员工所属门店及岗位。"
+    ],
+    [
+      "方案编号／版本",
+      "关联标识",
+      "只读",
+      "关联当期方案及目标、权重。"
+    ],
+    [
+      "客观指标结果",
+      "指标／目标／完成／得分",
+      "只读",
+      "大数据提供指标值；得分按待确认的评分规则计算。"
+    ],
+    [
+      "主观评价项目／分值",
+      "项目／数值",
+      "拟必填",
+      "拟由门店服务总监录入；评分人和分值范围待定，不可申诉。"
+    ],
+    [
+      "加扣分事项／分值",
+      "事项／有符号数值",
+      "条件",
+      "有事项时记录加扣分及分值；不可申诉。"
+    ],
+    [
+      "评价或加扣分依据",
+      "文本／附件关联",
+      "条件",
+      "拟在人工录入评价或加扣分时填写依据。"
+    ],
+    [
+      "发布状态／发布时间",
+      "待发布／已发布／时间",
+      "只读",
+      "拟在发布后向DMS生成结果确认任务；发布责任待定。"
+    ],
+    [
+      "员工确认状态／时间",
+      "状态／时间",
+      "只读",
+      "记录员工对当前版本的确认；申诉更新后无需再次确认。"
+    ],
+    [
+      "申诉处理状态",
+      "状态",
+      "只读",
+      "记录申诉所处节点，与员工确认状态分别展示。"
+    ],
+    [
+      "结果版本／更新原因",
+      "版本／文本",
+      "只读",
+      "拟保留修订前后结果及更新原因。"
+    ],
+    [
+      "最终总分",
+      "数值或待形成",
+      "条件",
+      "按评分公式汇总；公式待定。"
+    ]
+  ],
+  "appeals": [
+    [
+      "申诉单号",
+      "唯一标识",
+      "只读",
+      "关联员工、考核月份、申诉指标和原结果版本。"
+    ],
+    [
+      "申诉人／所属门店",
+      "工号／组织",
+      "只读",
+      "读取DMS当前员工身份及所属门店。"
+    ],
+    [
+      "申诉指标",
+      "必选／可选指标",
+      "拟必填",
+      "仅必选、可选指标可申诉；主观评价和加扣分不可申诉。"
+    ],
+    [
+      "原目标／完成值／版本",
+      "数值／版本",
+      "只读",
+      "保留申诉提交时的结果，后续修订不覆盖。"
+    ],
+    [
+      "期望核实的完成值",
+      "数值",
+      "拟选填",
+      "拟选填，用于说明数值差异；范围按指标定义，提交不改变原结果。"
+    ],
+    [
+      "申诉说明",
+      "文本",
+      "拟必填",
+      "说明异议及业务依据。"
+    ],
+    [
+      "证明材料",
+      "附件",
+      "拟选填",
+      "补充申诉依据；附件格式及大小待定。"
+    ],
+    [
+      "门店汇总批次／提交人",
+      "标识／人员",
+      "条件",
+      "拟按门店、月份汇总，记录店长提交信息。"
+    ],
+    [
+      "核实后的完成值",
+      "数值",
+      "拟必填",
+      "拟记录区域核实值，可维持原值；范围按指标定义，数据纠错责任待定。"
+    ],
+    [
+      "复核说明",
+      "文本",
+      "拟必填",
+      "说明核实依据及是否支持员工主张。"
+    ],
+    [
+      "总部确认结论",
+      "结论／处理人／时间",
+      "拟必填",
+      "总部确认后更新结果；退回、驳回处理待定。"
+    ],
+    [
+      "申诉状态",
+      "店长汇总／区域复核／总部确认／已更新",
+      "只读",
+      "依次记录门店汇总、区域复核、总部确认、结果更新。"
+    ],
+    [
+      "处理记录",
+      "角色／动作／时间／说明",
+      "只读",
+      "拟向员工展示本人申诉的处理记录。"
+    ],
+    [
+      "修订后结果版本",
+      "版本标识",
+      "只读",
+      "同步DMS展示，不生成再次确认任务。"
+    ]
+  ],
+  "archive": [
+    [
+      "快照编号",
+      "唯一标识",
+      "只读",
+      "关联考核月份和结果版本。"
+    ],
+    [
+      "归档月份／范围",
+      "月份／组织／人员",
+      "拟必填",
+      "指定归档月份、组织和人员。"
+    ],
+    [
+      "结果版本与内容",
+      "结果完整快照",
+      "只读",
+      "保存当期方案、目标、权重、完成值、评价、加扣分和处理记录。"
+    ],
+    [
+      "归档条件",
+      "业务条件",
+      "条件",
+      "拟在结果确认或申诉完成后归档；未完成对象的处理待定。"
+    ],
+    [
+      "快照生成时间／操作人",
+      "时间／人员",
+      "只读",
+      "记录归档操作人及生成时间。"
+    ],
+    [
+      "DMS同步状态",
+      "待同步／成功／失败",
+      "只读",
+      "记录DMS接收结果；失败不撤销业务结论。"
+    ],
+    [
+      "大数据归档状态",
+      "待回传／成功／失败",
+      "只读",
+      "拟记录大数据接收结果，并关联快照编号及版本。"
+    ],
+    [
+      "后续工资结算关联",
+      "人员／月份／版本",
+      "后续",
+      "后续向工资结算系统推送对应绩效数据；本期不做工资核算。"
+    ]
+  ],
+  "dms": [
+    [
+      "我的绩效入口",
+      "工作台入口",
+      "新增",
+      "在DMS小程序新增；入口位置待定。"
+    ],
+    [
+      "本人姓名／岗位／门店",
+      "身份信息",
+      "只读",
+      "复用登录身份，显示本人所属门店及岗位。"
+    ],
+    [
+      "待办类型",
+      "方案确认／结果确认",
+      "只读",
+      "在DMS内展示员工待办。"
+    ],
+    [
+      "待办月份／版本／状态",
+      "月份／版本／标签",
+      "只读",
+      "展示待处理对象的月份、版本及状态。"
+    ],
+    [
+      "方案指标／权重／目标",
+      "指标列表",
+      "只读",
+      "展示总部指标权重及服务总监分配给本人的目标，不展示其他员工目标。"
+    ],
+    [
+      "方案确认按钮",
+      "动作",
+      "条件",
+      "门店提交目标后可确认本人方案；同员工同版本只记录一次，不改变他人状态。"
+    ],
+    [
+      "累计完成／目标／数据时间",
+      "数值／时间",
+      "只读",
+      "与DMOC使用同一人员、月份和数据口径。"
+    ],
+    [
+      "结果构成",
+      "客观指标／评价／加扣分",
+      "只读",
+      "分项展示；主观评价和加扣分标注不可申诉。"
+    ],
+    [
+      "无异议确认",
+      "动作",
+      "条件",
+      "拟与处理中申诉互斥；确认后能否申诉待定。"
+    ],
+    [
+      "指标申诉入口",
+      "指标级操作",
+      "条件",
+      "仅对必选、可选指标展示，填写申诉说明及依据。"
+    ],
+    [
+      "申诉处理进度／结论",
+      "节点／说明",
+      "只读",
+      "显示本人申诉及处理结论；结果更新后无需再次确认。"
+    ],
+    [
+      "历史月份切换",
+      "月份选择",
+      "建议",
+      "拟支持查询本人历史月份的绩效结果。"
+    ]
+  ],
+  "feishu": [
+    [
+      "预警日期／考核年月",
+      "日期／月份",
+      "拟必填",
+      "区分通知日期与考核月份。"
+    ],
+    [
+      "数据截至时间",
+      "日期时间",
+      "拟必填",
+      "显示预警数据所属时间。"
+    ],
+    [
+      "接收人身份",
+      "飞书用户标识",
+      "拟必填",
+      "按管理岗位关联飞书账号；接收岗位和账号映射待定。"
+    ],
+    [
+      "接收人管理范围",
+      "大区／区域／门店范围",
+      "拟必填",
+      "仅展示接收人管理范围内的预警人员。"
+    ],
+    [
+      "预警人员数",
+      "去重人数",
+      "拟必填",
+      "管理范围内命中全国后30%的人员去重数。"
+    ],
+    [
+      "涉及门店数",
+      "去重门店数",
+      "拟必填",
+      "按预警人员所属门店去重。"
+    ],
+    [
+      "人员明细",
+      "门店／人员／指标",
+      "拟必填",
+      "展示预警人员及对应指标；拟通过链接查看完整明细。"
+    ],
+    [
+      "目标／完成／单位",
+      "数值",
+      "拟必填",
+      "与排名使用同一数据批次及指标口径。"
+    ],
+    [
+      "全国名次／参评人数",
+      "整数",
+      "拟必填",
+      "展示全国名次及对应参评人数；分组和公式待定。"
+    ],
+    [
+      "预警明细跳转",
+      "业务链接",
+      "建议",
+      "拟进入DMOC对应月份、管理范围的预警明细，并校验访问权限。"
+    ],
+    [
+      "发送状态／回执",
+      "状态／消息标识",
+      "只读",
+      "拟记录发送对象、时间、状态及回执。"
+    ],
+    [
+      "发送去重标识",
+      "日期＋接收人＋范围＋批次",
+      "建议",
+      "拟区分重复发送与补发；规则待接口评审。"
+    ]
+  ]
+};</script><script>const $=s=>document.querySelector(s);const $$=s=>[...document.querySelectorAll(s)];const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const KEY='after-sales-performance-prototype-v1-1';
+const roster=()=>[{id:'DEMO008',name:'李明',job:'服务顾问',targets:[null,null,null],confirmed:false},{id:'DEMO003',name:'周然',job:'服务顾问',targets:[null,null,null],confirmed:false}];
+const base=()=>({schema:2,scheme:{name:'直营售后月度绩效方案',month:'2026-11',store:'武汉光谷店',stage:0,employeeConfirmed:false,version:1,includeOptional:true,assignments:roster(),weights:[45,35,20],score:8,bonus:2},result:{month:'2026-10',targets:[100,160,20],weights:[45,35,20],published:false,confirmed:false,version:1,updated:false},appeal:null,notifications:[{time:'2026-11-04 09:00',scope:'湖北大区',people:2,status:'发送成功'}],snapshots:[],events:[]});
+let st;try{st=JSON.parse(localStorage.getItem(KEY))||base()}catch{st=base()}
+if(!Array.isArray(st.scheme.assignments)){st.scheme.assignments=roster();delete st.scheme.targets;st.scheme.employeeConfirmed=false;if(st.scheme.stage>0){st.scheme.stage=1;st.scheme.version++;st.scheme.migrationNotice='旧演示方案未包含逐人目标，已转回门店拆解。请重新分配并提交员工确认；历史结果和申诉保留。';}st.schema=2;try{localStorage.setItem(KEY,JSON.stringify(st))}catch{}}
+let dmsEmployeeId='DEMO008';let role='总部管理员';let metricTab='指标库';let filter={area:'',small:'',city:'',store:'',keyword:'',status:''};let pendingFilter={...filter};let queryMonth=null;let pendingMonth=null;let modal=null;let phonePage='home';let resultFilter='all';
+const metrics=[{name:'售后毛利额',code:'AS001',unit:'万元',target:100,actual:47.83,weight:45,type:'必选',source:'大数据指标服务'},{name:'结算工时',code:'AS002',unit:'小时',target:160,actual:112,weight:35,type:'必选',source:'大数据指标服务'},{name:'重点产品销售额',code:'AS003',unit:'万元',target:20,actual:8.6,weight:20,type:'可选',source:'大数据指标服务'}];
+const people=[['王晨','武汉汉口店','湖北大区','武汉一区','武汉市',1,97],['陈悦','长沙星沙店','湖南大区','长沙一区','长沙市',2,91],['周然','武汉光谷店','湖北大区','武汉一区','武汉市',3,88],['赵宁','长沙星沙店','湖南大区','长沙一区','长沙市',4,83],['林帆','武汉汉口店','湖北大区','武汉一区','武汉市',5,79],['吴桐','武汉光谷店','湖北大区','武汉一区','武汉市',6,75],['孙悦','长沙星沙店','湖南大区','长沙一区','长沙市',7,69],['李明','武汉光谷店','湖北大区','武汉一区','武汉市',8,47.83],['刘洋','长沙星沙店','湖南大区','长沙一区','长沙市',9,42.6],['何安','武汉汉口店','湖北大区','武汉一区','武汉市',10,38.5]].map((a,i)=>({id:'DEMO'+String(i+1).padStart(3,'0'),name:a[0],store:a[1],area:a[2],small:a[3],city:a[4],rank:a[5],actual:a[6],target:100,job:'服务顾问',warning:a[5]>=8}));
+const diagnosisHeaders=['门店编码','门店名称','员工姓名','员工编号','指标名称','当月目标','当月实际','完成率','完成率排名'];
+const diagnosisRows=[['DEMO-S001','武汉光谷店','李明','DEMO008','售后毛利额','100.00','47.83','47.83%','8'],['DEMO-S001','武汉光谷店','李明','DEMO008','结算工时','160','112','70.00%','6'],['DEMO-S001','武汉光谷店','李明','DEMO008','重点产品销售额','20.00','8.60','43.00%','9']];
+function diagnosisTable(){return `<div class="diagnosis-table">${table(diagnosisHeaders,diagnosisRows)}</div><p class="muted tiny">单位：售后毛利额、重点产品销售额为万元；结算工时为小时。</p>`}
+function diagnosisDetail(){openModal('门店诊断结果',`${kv([['诊断月份','2026-10（示例）'],['门店','武汉光谷店'],['数据说明','示例数据']])}${diagnosisTable()}<p class="sub">查看员工各项指标表现，作为月度方案配置参考。</p><p class="muted tiny">诊断月份、数据来源及排名规则待确认。</p>`,btn('字段说明','diagnosis-fields')+btn('关闭','close'))}
+const navs=[['rules','指标与规则'],['schemes','月度方案'],['approvals','审批工作台'],['tracking','执行与预警'],['results','结果管理'],['appeals','申诉管理'],['archive','月度归档']];
+const schemeStages=['草稿','待门店拆解','待员工确认','待店长审批','待区域审批','待大区审批','已生效'];
+function selectedMetrics(){return metrics.map((m,i)=>({...m,index:i})).filter(m=>m.index<2||st.scheme.includeOptional)}
+function currentEmployee(){return st.scheme.assignments.find(p=>p.id===dmsEmployeeId)||st.scheme.assignments[0]}
+function executionTargets(p){let allocation=st.scheme.assignments.find(a=>a.id===p.id);return allocation?(st.scheme.stage===6?allocation.targets:[null,null,null]):[100,160,20]}
+function confirmedCount(){return st.scheme.assignments.filter(p=>p.confirmed).length}
+function confirmationText(){return confirmedCount()+' / '+st.scheme.assignments.length}
+function employeeActual(i){return currentEmployee().id==='DEMO008'?metrics[i].actual:[88,136,14][i]}
+function allocationTable(editable=false){return `<div class="allocation-table">${table(['员工 / 工号','岗位',...selectedMetrics().map(m=>`${m.name}<br><span class="muted tiny">${m.unit} · 权重 ${st.scheme.weights[m.index]}%</span>`),'确认状态'],st.scheme.assignments.map(p=>[`${esc(p.name)}<small>${p.id}</small>`,p.job,...selectedMetrics().map(m=>editable?`<input aria-label="${p.name}${m.name}目标" id="allocation-${p.id}-${m.index}" type="number" step="any" value="${p.targets[m.index]??''}" placeholder="填写个人目标" style="width:132px">`:`${p.targets[m.index]??'—'}`),tag(p.confirmed?'已确认':st.scheme.stage>=2?'待确认':'未提交',p.confirmed?'green':'gray')]))}</div>`}
+
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch{}}function event(text){st.events.unshift({text,time:new Date().toLocaleTimeString('zh-CN',{hour12:false})});save()}function toast(text){$('.toast')?.remove();let x=document.createElement('div');x.className='toast';x.setAttribute('role','status');x.textContent=text;document.body.appendChild(x);setTimeout(()=>x.remove(),3000)}
+function route(){let a=location.hash.replace('#','').split('/');return {system:a[0]||'dmoc',page:a[1]||'schemes'}}function go(system,page){closeModal();const next='#'+system+'/'+page;if(location.hash===next)render();else location.hash=next}
+function btn(label,act,kind='',disabled=false){return `<button class="btn ${kind}" data-act="${act}" ${disabled?'disabled':''}>${label}</button>`}function link(label,act){return `<button class="text-btn" data-act="${act}">${label}</button>`}function tag(text,color='blue'){return `<span class="tag ${color}">${esc(text)}</span>`}function options(arr,value){return arr.map(x=>`<option ${x===value?'selected':''}>${esc(x)}</option>`).join('')}function kv(items){return `<div class="key-values">${items.map(([a,b])=>`<div><small>${a}</small>${b}</div>`).join('')}</div>`}function title(t,desc,action=''){return `<div class="page-top"><div><h1>${t}</h1><p>${desc}</p></div><div class="actions">${action}${link('字段说明','fields')}</div></div>`}function table(headers,rows){return `<div class="table-wrap"><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${headers.length}"><div class="empty">暂无符合条件的数据</div></td></tr>`}</tbody></table></div>`}function pager(n){return `<div class="pagination">共 ${n} 条 <span>20条/页</span><span class="page">1</span></div>`}function stats(arr){return `<div class="stats">${arr.map(([t,n,s=''])=>`<div class="stat"><span>${t}</span><strong>${n}</strong><small>${s}</small></div>`).join('')}</div>`}
+function scoped(){return people.filter(p=>role==='总部管理员'||(role==='区域售后总监'||role==='售后大区审批人'?p.area==='湖北大区':p.store==='武汉光谷店'))}function filtered(){if(queryMonth&&queryMonth!==(route().page==='results'?'2026-10':'2026-11'))return [];return scoped().filter(p=>(!filter.area||p.area===filter.area)&&(!filter.small||p.small===filter.small)&&(!filter.city||p.city===filter.city)&&(!filter.store||p.store===filter.store)&&(!filter.keyword||p.name.includes(filter.keyword)||p.id===filter.keyword)&&(!filter.status||filter.status==='预警人员'&&p.warning||filter.status==='正常人员'&&!p.warning))}
+function regionFields(){let rows=scoped(),filter=pendingFilter;function opts(k,prior){return [...new Set(rows.filter(p=>Object.entries(prior).every(([a,b])=>!b||p[a]===b)).map(p=>p[k]))]}return [['大区','area',opts('area',{})],['小区','small',opts('small',{area:filter.area})],['城市','city',opts('city',{area:filter.area,small:filter.small})],['门店','store',opts('store',{area:filter.area,small:filter.small,city:filter.city})]].map(([label,key,vals])=>`<div class="field"><label>${label}</label><select data-filter="${key}"><option value="">全部${label}</option>${options(vals,filter[key])}</select></div>`).join('')}
+function filters(kind='base'){return `<div class="panel"><div class="panel-title">筛选</div><div class="filters">${regionFields()}<div class="field"><label>考核年月</label><input id="period" type="month" value="${pendingMonth||(kind==='results'?'2026-10':'2026-11')}"></div>${kind==='track'||kind==='results'?`<div class="field"><label>人员姓名 / 工号</label><input id="person-search" value="${esc(pendingFilter.keyword)}" placeholder="输入姓名或工号"></div>`:''}${kind==='track'?`<div class="field"><label>预警状态</label><select id="warning-filter"><option value="">全部状态</option>${options(['预警人员','正常人员'],pendingFilter.status)}</select></div>`:''}</div><div class="filter-actions">${btn('重置','reset-filter','weak')}${btn('查询','query','primary')}</div></div>`}
+function steps(){let labels=['总部下发','目标拆到人','员工确认','店长审批','区域审批','大区审批'];return `<div class="steps">${labels.map((t,i)=>`<div class="step ${st.scheme.stage>i?'done':st.scheme.stage===i?'current':''}"><i>${st.scheme.stage>i?'✓':i+1}</i>${t}</div>`).join('')}</div>`}
+function permission(needed){return role===needed}function schemeVisible(){return (!filter.store||filter.store==='武汉光谷店')&&(!filter.area||filter.area==='湖北大区')&&(!filter.city||filter.city==='武汉市')&&(!filter.small||filter.small==='武汉一区')&&(!queryMonth||queryMonth==='2026-11')}
+function schemes(){let s=st.scheme;return title('月度方案','总部配置指标与权重，门店服务总监拆解员工目标',permission('总部管理员')?btn('配置指标与权重','edit-scheme','primary',s.stage>0):permission('门店服务总监')&&s.stage===1?btn('拆解员工目标','store-confirm','primary'):'')+`${s.migrationNotice?`<div class="notice warn">${s.migrationNotice}</div>`:''}`+filters()+stats([['本月方案',schemeVisible()?1:0,'武汉光谷店'],['待员工确认',schemeVisible()&&s.stage===2?s.assignments.length-confirmedCount():0,'按员工分别确认'],['审批中',schemeVisible()&&s.stage>=3&&s.stage<=5?1:0,'按审批节点流转'],['已生效',schemeVisible()&&s.stage===6?1:0,'大区审批完成']])+`<section class="panel"><div class="toolbar"><div class="panel-title" style="margin:0">门店绩效方案</div>${tag('2026年11月','gray')}</div>${table(['方案名称','门店','考核月份','版本','员工确认','当前状态','操作'],schemeVisible()?[[`${s.name}<small>PF-202611-001</small>`,s.store,s.month,'V'+s.version,confirmationText(),tag(schemeStages[s.stage],s.stage===6?'green':'blue'),`<div class="actions">${link('查看','scheme-detail')}${link('诊断结果','diagnosis')}${s.stage===0&&permission('总部管理员')?link('下发','dispatch'):''}${s.stage===1&&permission('门店服务总监')?link('拆解员工目标','store-confirm'):''}</div>`]]:[])}${pager(schemeVisible()?1:0)}</section>`}
+function rules(){return title('指标与规则','集中维护绩效指标、评价规则及岗位授权',btn('新增指标','new-metric','primary',!permission('总部管理员')))+`<div class="panel"><div class="tabs">${['指标库','主观评价与加扣分','岗位权限'].map(t=>`<button class="${metricTab===t?'on':''}" data-act="rule-tab:${t}">${t}</button>`).join('')}</div>${metricTab==='指标库'?`<div class="notice">示例指标，评分规则待确认。</div>${table(['指标编码','指标名称','类型','单位','适用岗位','数据来源','状态','操作'],[...metrics.map((m,i)=>[m.code,m.name,tag(m.type,m.type==='必选'?'blue':'gray'),m.unit,'服务顾问',m.source,tag('启用','green'),link('查看配置','metric:'+i)]),...(st.extraMetrics||[]).map(m=>[esc(m.code),esc(m.name),tag(m.type,'gray'),esc(m.unit),'待配置','待映射',tag('草稿','gray'),'待补齐规则'])])}`:metricTab==='主观评价与加扣分'?`<div class="notice">主观评价和加扣分均不允许申诉。计入最终结果的方式待业务确认。</div>${table(['项目','类型','示例规则','录入角色','申诉','操作'],[['服务规范评价','主观评价','0–10 分','门店服务总监（建议）',tag('不允许','gray'),link('查看规则','evaluation-rule')],['服务表扬 / 投诉','加扣分','按事项登记分值及依据','门店服务总监（建议）',tag('不允许','gray'),link('查看规则','bonus-rule')]])}`:`<div class="notice">拟定权限，岗位与账号映射待核对。</div>${table(['业务角色','示例数据范围','可执行动作'],[['总部管理员','全国授权直营门店','指标与权重配置、方案下发、申诉总部确认、归档'],['门店服务总监','本门店','拆解员工目标、评价和加扣分录入'],['门店店长','本门店','方案一级审批、门店申诉汇总'],['区域售后总监','所辖区域','方案二级审批、申诉复核'],['售后大区审批人','所属大区','方案三级审批'],['门店员工','本人','DMS 方案确认、进度查看、结果确认、指标申诉']])}`}</div>`}
+function approvals(){let s=st.scheme;let needed={3:'门店店长',4:'区域售后总监',5:'售后大区审批人'}[s.stage];return title('审批工作台','查看当前节点对应的月度方案审批任务')+`<section class="panel"><div class="panel-title">审批进度</div>${steps()}${kv([['方案',s.name],['门店',s.store],['当前处理人',needed||'—']])}</section><section class="panel"><div class="panel-title">我的待办</div>${needed&&role===needed?table(['事项','月份','当前节点','提交状态','操作'],[[s.name,s.month,needed,tag('待审批'),link('审核方案','approve-detail')]]):`<div class="empty">${needed?'当前角色无待办。可切换为“'+needed+'”。':'暂无审批任务，等待员工确认方案。'}</div>`}</section>`}
+function tracking(){let rows=filtered(),warn=rows.filter(p=>p.warning);return title('执行与预警','全国直营门店个人排名 · 数据截至 2026-11-04 08:30',btn('查看预警记录','alert-log',''))+filters('track')+stats([['当前范围人员',rows.length,'全国示例总体 10 人'],['预警人员',warn.length,'全国排名后 30%'],['涉及门店',new Set(warn.map(p=>p.store)).size,'按预警人员归属去重'],['数据日期','11月04日','示例日累计数据']])+`<section class="panel"><div class="toolbar"><div class="panel-title" style="margin:0">个人执行明细</div>${link('仅看预警人员','only-warning')}</div><div class="notice">个人目标在大区审批通过后生效；审批前显示“—”。其他人员使用独立示例目标，全国名次与预警标记仅作样例，不随本地目标重算。</div>${table(['全国名次','人员 / 工号','门店','岗位','目标 / 完成','进度示意','预警状态','操作'],rows.map(p=>[`${p.rank} / 10`,p.name+`<small>${p.id}</small>`,p.store,p.job,`${executionTargets(p)[0]??'—（方案未生效）'} / ${p.actual} 万元`,`<div class="progress ${p.warning?'orange':''}"><i style="width:${executionTargets(p)[0]>0?Math.max(0,Math.min(p.actual/executionTargets(p)[0]*100,100)):0}%"></i></div>`,tag(p.warning?'后30%预警':'正常',p.warning?'orange':'green'),link('个人明细','person:'+p.id)]))}${pager(rows.length)}</section>`}
+function results(){let r=st.result,visible=filtered().some(p=>p.name==='李明'),show=['总部管理员','门店服务总监'].includes(role);return title('结果管理','确认客观指标、主观评价和加扣分，形成员工月度结果',btn(r.published?'已发布员工侧':'发布员工结果','publish-result','primary',r.published||!permission('总部管理员')))+filters('results')+stats([['结果月份','2026-10','已结束的考核周期'],['待员工确认',visible&&r.published&&!r.confirmed&&!r.updated&&!st.appeal?1:0,'李明'],['申诉处理中',visible&&st.appeal&&st.appeal.stage<3?1:0,'仅客观指标'],['当前结果版本',visible?'V'+r.version:'—',r.updated?'申诉处理后已更新':'月度初始结果']])+`<section class="panel"><div class="toolbar"><div class="panel-title" style="margin:0">员工绩效结果</div>${show?btn('录入评价与加扣分','edit-evaluation','',r.published):''}</div>${table(['人员','门店','必选 / 可选指标','主观评价','加扣分','结果状态','操作'],filtered().filter(p=>p.name==='李明').map(p=>[p.name,p.store,'3 项',st.scheme.score+' 分',`${st.scheme.bonus>=0?'+':''}${st.scheme.bonus} 分`,tag(r.updated?'申诉已更新':st.appeal?'申诉处理中':r.confirmed?'员工已确认':r.published?'待员工确认':'待发布',r.updated||r.confirmed?'green':'blue'),link('结果详情','result-detail')]))}<div class="notice" style="margin-top:18px">总分计算规则待确认，当前展示分项结果。</div></section>`}
+function appealStatus(){return st.appeal?['待店长汇总','待区域复核','待总部确认','结果已更新'][st.appeal.stage]:'无申诉'}
+function appeals(){let a=st.appeal;return title('申诉管理','仅处理必选 / 可选指标结果的异议')+`<section class="panel"><div class="panel-title">申诉记录</div>${table(['申诉单号','考核月份','人员 / 门店','申诉指标','当前状态','操作'],a?[[a.id,'2026-10','李明 / 武汉光谷店',metrics[a.metric].name,tag(appealStatus(),a.stage===3?'green':'orange'),link('查看处理','appeal-detail')]]:[])}${!a?`<div class="notice" style="margin-top:18px">发布员工结果后，可切换至 DMS，在结果页发起指标申诉。</div>`:''}</section>`}
+function archive(){let ready=(st.result.confirmed||st.result.updated)&&(!st.appeal||st.appeal.stage===3);return title('月度归档','保存月度结果版本，供查询与数据回传',btn('生成月度快照','snapshot','primary',!permission('总部管理员')||!ready))+`<section class="panel"><div class="notice">拟在结果确认或申诉结束后归档；整月归档条件待确认。</div>${table(['快照编号','月份','结果版本','人员范围','DMS 同步','大数据归档','操作'],st.snapshots.map((s,i)=>[s.id,'2026-10','V'+s.version,'李明（示例）',tag('模拟成功','green'),tag('模拟成功','green'),link('查看快照','snapshot-detail:'+i)]))}${pager(st.snapshots.length)}</section>`}
+function shell(){let r=route();return `<header class="platform-header"><div class="brand-mark">V</div><div class="brand">岚图数字化营销平台</div><div class="breadcrumb">区域作战中心 / 售后绩效管理</div><div class="header-right"><label for="role">切换业务角色</label><select id="role">${options(['总部管理员','门店服务总监','门店店长','区域售后总监','售后大区审批人'],role)}</select></div></header><div class="shell"><aside class="sidebar"><div class="menu-head">▦　区域销售管理</div><div class="menu-head">▣　目标管理</div><div class="menu-head active">▤　售后绩效管理</div>${navs.map(([id,t])=>`<button class="${r.page===id?'on':''}" data-act="nav:${id}">${t}</button>`).join('')}<p class="muted tiny" style="padding:20px 16px">售后绩效管理<br>月度方案与结果</p></aside><main class="workspace">${({rules,schemes,approvals,tracking,results,appeals,archive}[r.page]||schemes)()}</main></div>`}
+function metricCard(m,i,detail=false){let actual=detail?(st.result.updated&&st.appeal?.metric===i?st.appeal.approvedValue:m.actual):employeeActual(i),target=detail?st.result.targets[i]:currentEmployee().targets[i];return `<section class="mobile-card"><div class="row"><span class="metric-title">${m.name}</span>${tag(m.type,'gray')}</div><div class="row"><div><span class="big">${actual}</span><span class="muted tiny"> / ${target??'—'} ${m.unit}</span></div><span class="sub tiny">权重 ${detail?st.result.weights[i]:st.scheme.weights[i]}%</span></div>${!detail&&target>0?`<div class="progress" style="margin-top:12px"><i style="width:${Math.max(0,Math.min(actual/target*100,100))}%"></i></div>`:''}${detail?`<div class="row"><span class="muted tiny">客观指标结果</span>${st.result.published&&!st.result.confirmed&&!st.appeal&&!st.result.updated?link('对该指标申诉','appeal-form:'+i):''}</div>`:''}</section>`}
+function phone(){let r=route(),page=r.page;phonePage=page;let s=st.scheme,res=st.result,employee=currentEmployee(),content='',bottom='',t='我的绩效',back=false;
+if(page==='home'){content=`<section class="mobile-card"><div class="row"><h3 style="margin:0">${employee.name}</h3>${tag('服务顾问','gray')}</div><p class="muted tiny">武汉光谷店 · ${employee.id}</p></section><section class="mobile-card"><h3>我的待办</h3><button class="list-link" data-act="dms:scheme"><span>11月绩效方案<small>${s.stage<2?'方案尚未下发至员工':employee.confirmed?'已确认，查看方案':'请确认本月指标、权重和目标'}</small></span>${tag(employee.confirmed?'已确认':s.stage>=2?'待确认':'准备中',employee.confirmed?'green':'blue')}</button><button class="list-link" data-act="dms:result"><span>10月绩效结果<small>${employee.id!=='DEMO008'?'当前示例未提供历史结果':res.updated?'申诉结果已更新，无需再次确认':st.appeal?appealStatus():res.confirmed?'已完成结果确认':res.published?'查看结果并确认或申诉':'结果尚未发布'}</small></span>${tag(employee.id!=='DEMO008'?'暂无数据':res.updated?'已更新':st.appeal?'处理中':res.confirmed?'已确认':res.published?'待确认':'未发布',res.updated||res.confirmed?'green':'blue')}</button></section><section class="mobile-card"><h3>11月执行进度</h3><p class="sub">查看各项指标累计完成与目标。</p>${btn('查看我的进度','dms:progress','wide')}</section>`}
+if(page==='scheme'){t='月度绩效方案';back=true;content=`<div class="notice">2026年11月 · V${s.version} · ${schemeStages[s.stage]}</div>${s.stage<2?`<section class="mobile-card"><p>当前方案尚未下发至员工。</p><p class="muted tiny">请等待门店服务总监拆解个人目标。</p></section>`:`<section class="mobile-card"><h3>我的考核方案</h3><p class="sub tiny">${employee.name} · ${employee.id} · 服务顾问</p>${metrics.map((m,i)=>i===2&&!s.includeOptional?'':`<div class="row" style="padding:12px 0;border-bottom:1px solid #f2f3f5"><div>${m.name}<small class="muted" style="display:block">${m.type} · 权重 ${s.weights[i]}%</small></div><strong>${employee.targets[i]} ${m.unit}</strong></div>`).join('')}<p class="muted tiny">主观评价：服务规范；加扣分：按事项登记。具体计分规则待确认。</p></section>`}`;if(s.stage===2&&!employee.confirmed)bottom=btn('确认本月方案','employee-confirm','primary');if(employee.confirmed)content+=`<div class="notice">你已确认此版本的指标、权重和目标。方案审批状态：${schemeStages[s.stage]}。</div>`}
+if(page==='progress'){t='我的执行进度';content=`<section class="mobile-card"><div class="row"><h3 style="margin:0">2026年11月</h3>${tag('月度累计','gray')}</div><p class="muted tiny">数据截至 11-04 08:30 · 示例数据</p></section>${s.stage<6?'<section class="mobile-card"><p>当前方案尚未生效，审批完成后展示执行进度。</p><p class="muted tiny">个人目标可在月度方案中查看。</p></section>':metrics.map((m,i)=>i===2&&!s.includeOptional?'':metricCard(m,i)).join('')}`}
+if(page==='result'){t='月度绩效结果';content=`<div class="notice">2026年10月 · 结果 V${res.version}</div>${!res.published?'<section class="mobile-card"><p>本月结果尚未发布，请稍后查看。</p></section>':`${res.updated?'<div class="notice">申诉处理后的结果已更新，无需再次确认。</div>':st.appeal?`<div class="notice warn">${appealStatus()}。${link('查看处理进度','dms:appeal')}</div>`:res.confirmed?'<div class="notice">你已确认本月绩效结果。</div>':''}${metrics.map((m,i)=>metricCard(m,i,true)).join('')}<section class="mobile-card"><div class="row"><span>主观评价</span><strong>${s.score} 分</strong></div><p class="muted tiny">服务规范评价 · 不允许申诉</p><hr><div class="row"><span>加扣分</span><strong>${s.bonus>=0?'+':''}${s.bonus} 分</strong></div><p class="muted tiny">服务表扬事项 · 不允许申诉</p></section><p class="muted tiny">总分计算规则待确认。</p>`}`;if(res.published&&!res.confirmed&&!st.appeal&&!res.updated)bottom=btn('无异议，确认结果','confirm-result','primary')}
+if(page.startsWith('appeal-form')){let i=Number(page.split('-').at(-1));t='指标申诉';back=true;content=`<div class="notice">仅支持必选、可选指标申诉。</div><section class="mobile-card"><h3>${metrics[i].name}</h3><p class="muted tiny">2026年10月 · 原完成值 ${metrics[i].actual} ${metrics[i].unit}</p><div class="field"><label for="appeal-value">期望核实的完成值（选填）</label><input id="appeal-value" type="number" min="0" step="0.01" placeholder="请输入数值"></div><div class="field"><label for="appeal-reason">申诉说明 *</label><textarea id="appeal-reason" maxlength="500" placeholder="请说明差异及相关业务单据编号"></textarea></div><div class="field"><label for="appeal-file">证明材料（可选）</label><input id="appeal-file" type="file" accept=".pdf,.png,.jpg,.jpeg"><p class="muted tiny">演示仅记录文件名，不上传。</p></div><div class="error" id="phone-error" role="alert"></div></section>`;bottom=btn('提交申诉','submit-appeal:'+i,'primary')}
+if(page==='appeal'){t='申诉处理进度';back=true;let a=st.appeal;content=a?`<section class="mobile-card"><div class="row"><h3 style="margin:0">${metrics[a.metric].name}</h3>${tag(appealStatus(),a.stage===3?'green':'orange')}</div><p class="muted tiny">${a.id}</p><p>申诉说明：${esc(a.reason)}</p><p>期望核实值：${a.requested==null?'未填写':a.requested+' '+metrics[a.metric].unit}</p>${a.stage===3?`<hr><p>处理结论：${esc(a.conclusion)}</p><p>更新完成值：${a.approvedValue} ${metrics[a.metric].unit}</p><p class="muted tiny">处理结果已同步，无需再次确认。</p>`:''}</section><section class="mobile-card"><h3>处理记录</h3><div class="timeline">${a.history.map(h=>`<div><b>${esc(h)}</b></div>`).join('')}</div></section>`:'<div class="empty">暂无申诉记录</div>'}
+if(employee.id!=='DEMO008'&&(page==='result'||page.startsWith('appeal'))){t='月度绩效结果';content='<section class="mobile-card"><p>当前示例员工暂无10月结果。</p></section>';bottom='';}
+return `<div class="mobile-stage"><div class="phone"><div class="phone-status"><b>9:41</b><span>●●●　▰</span></div><div class="phone-nav">${back?`<button data-act="dms:${page.startsWith('appeal')?'result':'home'}">‹ 返回</button>`:'<span style="width:44px"></span>'}<h2>${t}</h2><button data-act="fields">说明</button></div><main class="phone-content"><div class="demo-identity"><label for="dms-employee">演示身份</label><select id="dms-employee">${s.assignments.map(p=>`<option value="${p.id}" ${p.id===employee.id?'selected':''}>${p.name} · ${p.id}</option>`).join('')}</select><small>仅用于原型演示；正式小程序按登录人展示。</small></div>${content}</main>${bottom?`<div class="fixed-action">${bottom}</div>`:''}<nav class="phone-tabs">${[['home','待办'],['progress','进度'],['result','结果']].map(([p,l])=>`<button class="${page===p||p==='home'&&page==='scheme'?'on':''}" data-act="dms:${p}">${l}</button>`).join('')}</nav></div><aside class="mobile-note"><div class="code-label">DMS 小程序改造</div><h1>我的绩效</h1><p>员工从新增入口进入，查看方案、月度进度与结果，并对客观指标发起申诉。</p><div class="panel"><h3 class="section-heading">当前演示身份</h3><p class="sub">${employee.name} · 武汉光谷店 · 服务顾问</p><p class="tiny muted">入口位置待与现有 DMS 核对。</p>${btn('打开月度方案','dms:scheme','wide')}</div><div class="panel"><h3 class="section-heading">跨端处理记录</h3><div class="timeline">${st.events.slice(0,4).map(e=>`<div><b>${esc(e.text)}</b><small>${e.time}</small></div>`).join('')||'<p class="muted tiny">暂无操作记录。</p>'}</div></div></aside></div>`}
+function feishu(){return `<div class="feishu-stage"><section class="chat-window"><div class="chat-head"><b>售后绩效预警</b><div class="muted tiny">应用机器人 · 管理视角</div></div><div class="chat-body"><div class="chat-meta">11月04日 09:00 · 消息示例</div><article class="message"><div class="message-header">售后绩效日报 · 后30%预警</div><div class="message-body"><p><strong>湖北大区 · 2026年11月</strong></p><p class="sub">数据截至 11-04 08:30。请关注当前管理范围内的绩效执行情况。</p><p>预警人员 <strong>2 人</strong>　涉及门店 <strong>2 家</strong></p><hr style="border:0;border-top:1px solid var(--line);margin:18px 0"><p><b>武汉光谷店 · 李明</b><br>售后毛利额　47.83 / 100 万元<br><span class="muted">全国名次 8 / 10 · 后30%</span></p><p><b>武汉汉口店 · 何安</b><br>售后毛利额　38.5 / 100 万元<br><span class="muted">全国名次 10 / 10 · 后30%</span></p>${btn('查看预警明细','feishu-link','primary')}<p class="muted tiny" style="margin:12px 0 0">全国直营门店个人排名；仅展示接收人的授权范围。此消息为独立示例快照，不随本地目标编辑更新。</p></div></article></div></section><aside class="explain"><div class="code-label">飞书改造点</div><h2>只承接管理预警通知</h2><p>新增预警消息模板、管理者接收人映射、发送记录和明细跳转。员工侧方案和结果确认均在 DMS 小程序完成。</p><section class="panel"><h3 class="section-heading">消息关键字段</h3>${kv([['统计月份','2026-11'],['预警人员数','2'],['涉及门店数','2'],['数据时间','11-04 08:30'],['统计范围','湖北大区'],['触发频率','每日']])}</section><p class="muted tiny">消息预览，未实际发送。预警目标取通知生成时的快照；本页使用独立示例数据。排名规则、发送时间和接收角色待确认。</p>${btn('查看发送记录','alert-log')}${link('查看消息字段','fields')}</aside></div>`}
+function render(){let r=route();$('#app').innerHTML=`<div class="reviewbar"><b>售后绩效管理　<span style="font-weight:400;color:#a8b6cd">V1.1 评审原型 · 示例数据</span></b><div class="system-tabs">${[['dmoc','区域作战中心'],['dms','DMS 小程序'],['feishu','飞书预警']].map(([id,l])=>`<button class="${r.system===id?'on':''}" data-act="system:${id}">${l}</button>`).join('')}</div><div class="review-actions"><button data-act="review">评审说明</button><button data-act="reset">重置<span class="reset-label">演示</span></button></div></div>${r.system==='dmoc'?shell():r.system==='dms'?phone():feishu()}`;$('#app').dataset.route=location.hash||'#dmoc/schemes';if(modal)drawModal()}
+function openModal(title,body,footer=''){modal={title,body,footer};drawModal()}function drawModal(){$('#modal')?.remove();let el=document.createElement('div');el.id='modal';el.className='drawer-mask';el.innerHTML=`<section class="drawer ${modal.body.includes('diagnosis-table')?'drawer-wide':''}" role="dialog" aria-modal="true" aria-label="${esc(modal.title)}"><header class="drawer-head"><h2>${modal.title}</h2><button class="close" data-act="close" aria-label="关闭">×</button></header><div class="drawer-body">${modal.body}</div><footer class="drawer-foot">${modal.footer||btn('关闭','close')}</footer></section>`;document.body.appendChild(el);el.querySelector('.close').focus()}
+function closeModal(){modal=null;$('#modal')?.remove()}
+function schemeDetail(edit=false,store=false){let s=st.scheme;if(edit&&(!permission('总部管理员')||s.stage!==0)||store&&(!permission('门店服务总监')||s.stage!==1))return;openModal(store?'拆解员工目标':edit?'配置指标与权重':'月度方案详情',`${steps()}${edit?`<div class="form-grid"><div class="field"><label>方案名称 *</label><input id="scheme-name" value="${esc(s.name)}" maxlength="50"></div><div class="field"><label>考核月份</label><input type="month" value="2026-11" disabled></div><div class="field"><label>适用门店</label><input value="武汉光谷店" disabled></div><div class="field"><label>适用岗位</label><input value="服务顾问" disabled></div></div>`:kv([['方案名称',s.name],['考核月份',s.month],['版本','V'+s.version],['门店',s.store],['员工确认',confirmationText()],['状态',schemeStages[s.stage]]])}<h3>总部下发指标与权重</h3>${table(['指标','类型','权重'],(edit?metrics.map((m,i)=>({...m,index:i})):selectedMetrics()).map(m=>[m.name,m.index===2&&edit?`<label><input id="include-optional" type="checkbox" ${s.includeOptional?'checked':''}> 可选</label>`:tag(m.type,'gray'),edit?`<input aria-label="${m.name}权重" id="weight-${m.index}" type="number" min="0" max="100" value="${s.weights[m.index]}" ${m.index===2&&!s.includeOptional?'disabled':''} style="width:70px"> %`:`${s.weights[m.index]}%`]))}<p class="muted tiny">${edit?'总部配置指标与权重；目标由门店服务总监拆到员工。权重合计 100% 为当前演示规则，正式计分口径待确认。':'指标与权重由总部确定，门店只读。'}</p>${!edit?`<h3>员工目标拆解</h3><p class="sub">${store?'由门店服务总监填写每位员工的个人目标。保存草稿不通知员工，提交后才生成 DMS 确认待办。':'由门店服务总监分配，员工在 DMS 分别确认。'}</p>${allocationTable(store)}<p class="muted tiny">门店总目标来源及分配合计核对口径待确认；当前不校验分配总和。目标数值范围及小数位按正式指标定义确认。</p>`:''}<h3>门店诊断结果</h3><p class="sub tiny">诊断月份：2026-10（示例） · 武汉光谷店 · 示例数据</p>${diagnosisTable()}<p class="muted tiny">修改方案不改变诊断数据；诊断月份的选取规则待确认。</p><h3>主观评价与加扣分</h3><p class="sub">服务规范评价、服务表扬 / 投诉加扣分均不允许申诉。</p><div class="error" id="form-error" role="alert"></div>`,edit?`${btn('取消','close')}${btn('保存草稿','save-scheme','primary')}`:store?`${btn('取消','close')}${btn('保存草稿','save-allocation')}${btn('提交员工确认','save-store','primary')}`:btn('关闭','close'))}
+function resultDetail(){openModal('李明的月度绩效结果',`${kv([['人员','李明 · 服务顾问'],['门店','武汉光谷店'],['考核月份','2026-10'],['结果版本','V'+st.result.version],['状态',st.result.updated?'申诉已更新':st.result.confirmed?'已确认':st.result.published?'已发布':'未发布']])}<h3>指标结果</h3>${table(['指标','目标','完成','申诉'],metrics.map((m,i)=>[m.name,`${st.result.targets[i]} ${m.unit}`,`${st.result.updated&&st.appeal?.metric===i?st.appeal.approvedValue:m.actual} ${m.unit}`,'允许']))}<h3>评价与加扣分</h3>${table(['项目','结果','规则'],[['服务规范评价',st.scheme.score+' 分','不允许申诉'],['服务表扬事项',(st.scheme.bonus>=0?'+':'')+st.scheme.bonus+' 分','不允许申诉']])}<p class="muted tiny">总分计算规则待确认。${st.result.updated?'更新后无需再次确认。':''}</p>`)}
+function showAppeal(){let a=st.appeal;if(!a)return;let owner=['门店店长','区域售后总监','总部管理员'][a.stage];let actionable=role===owner;openModal('指标申诉处理',`${kv([['申诉单号',a.id],['人员 / 门店','李明 / 武汉光谷店'],['考核月份','2026-10'],['申诉指标',metrics[a.metric].name],['当前状态',appealStatus()],['当前处理角色',owner||'已完成']])}<h3>员工提交内容</h3><div class="readonly">${esc(a.reason)}<br>原完成值：${metrics[a.metric].actual} ${metrics[a.metric].unit}<br>期望核实值：${a.requested==null?'未填写':a.requested+' '+metrics[a.metric].unit}<br>材料：${esc(a.file||'未提供')}</div><h3>处理记录</h3><div class="timeline">${a.history.map(h=>`<div><b>${esc(h)}</b></div>`).join('')}</div>${actionable&&a.stage===1?`<div class="form-grid"><div class="field"><label>核实后的完成值 *</label><input type="number" id="review-value" min="0" step="0.01" value="${a.requested??metrics[a.metric].actual}"></div><div class="field"><label>复核说明 *</label><input id="review-note" placeholder="填写核实依据" maxlength="200"></div></div>`:''}${a.stage>=2?`<h3>区域复核意见</h3><p>${esc(a.conclusion||'')} · 核实值 ${a.approvedValue} ${metrics[a.metric].unit}</p>`:''}<div class="error" id="form-error" role="alert"></div>`,`${btn('关闭','close')}${actionable?btn(['汇总并提交区域复核','提交总部确认','确认并更新结果'][a.stage],'appeal-next','primary'):''}`)}
+function fieldHelp(){let r=route();let key=r.system==='dmoc'?r.page:r.system==='dms'?(r.page.startsWith('appeal')?'appeals':'dms'):'feishu';let group=window.FIELD_GROUPS?.[key]||window.FIELD_GROUPS?.common;openModal('页面字段与交互说明',`<p class="sub">字段定义为评审稿，必填项与默认值待确认。</p>${group?table(['字段','类型 / 展示','必填','来源与规则'],group.map(f=>[f[0],f[1],f[2],`<span style="white-space:normal;display:block;min-width:230px">${f[3]}</span>`])):'<p>详见配套需求文档的字段定义。</p>'}`)}
+function action(a){let [cmd,arg]=a.split(':');if(cmd==='nav'){filter={area:'',small:'',city:'',store:'',keyword:'',status:''};pendingFilter={...filter};queryMonth=null;pendingMonth=null;go('dmoc',arg)}else if(cmd==='system'){go(arg,arg==='dmoc'?'schemes':arg==='dms'?'home':'card')}else if(cmd==='dms'){go('dms',arg)}else if(cmd==='close')closeModal();else if(cmd==='rule-tab'){metricTab=arg;render()}else if(cmd==='diagnosis')diagnosisDetail();else if(cmd==='diagnosis-fields')openModal('门店诊断结果字段说明',`<p class="sub">九个字段沿用诊断示例，来源映射待核对。</p>${table(['字段','类型 / 展示','要求','来源与规则'],window.FIELD_GROUPS.diagnosis.map(f=>[f[0],f[1],f[2],`<span style="white-space:normal;display:block;min-width:230px">${f[3]}</span>`]))}`,btn('返回诊断结果','diagnosis'));else if(cmd==='fields')fieldHelp();else if(cmd==='review')openModal('评审说明',`<p>在页面右上角点击“字段说明”，查看当前页面的字段与规则。</p><div class="note-grid"><article><h4>已确认的边界</h4><p>总部负责指标和权重，门店服务总监负责目标拆到人。工资核算不在本期；后续推送工资结算系统。主观评价、加扣分不允许申诉。申诉更新后不再次确认。飞书只发管理预警。排名对象为全国直营门店人员。</p></article><article><h4>本版设计建议</h4><p>菜单、字段、角色范围和状态为拟定方案；权重合计100%、申诉与确认互斥、归档条件待确认。</p></article><article><h4>尚未确定</h4><p>正式指标和评分公式、跨岗位排名、并列和人数取整、审批退回、申诉时限、通知接收人与发送时间。</p></article><article><h4>如何演示</h4><p>总部配置指标权重并下发 → 服务总监拆解员工目标 → 两名示例员工分别在 DMS 确认 → 店长、区域、大区依次审批。结果发布后，可确认或申诉；重置后体验另一分支。当前申诉仅演示一轮完成值核实；申诉字段范围和再次申诉规则待确认。</p></article></div><p class="muted tiny">数据均为示例，操作仅保存在当前浏览器。未接入真实数据和飞书发送；审批退回、多轮申诉、附件上传、全量历史查询及接口异常处理未实现。</p>`);else if(cmd==='reset')openModal('重置演示数据','<p>清除本原型的方案状态、申诉、确认和快照，恢复初始示例。</p>',btn('取消','close')+btn('重置','do-reset','primary'));else if(cmd==='do-reset'){st=base();dmsEmployeeId='DEMO008';save();closeModal();render();toast('演示已重置')}
+else if(cmd==='edit-scheme')schemeDetail(true);else if(cmd==='scheme-detail')schemeDetail();else if(cmd==='store-confirm')schemeDetail(false,true);
+else if(cmd==='save-scheme'){if(!permission('总部管理员')||st.scheme.stage!==0||!$('#scheme-name'))return;let includeOptional=$('#include-optional').checked,weights=metrics.map((_,i)=>i===2&&!includeOptional?0:Number($('#weight-'+i).value));let missingWeight=metrics.some((_,i)=>(i<2||includeOptional)&&$('#weight-'+i).value==='');let err=!$('#scheme-name').value.trim()?'请填写方案名称':missingWeight?'请填写所有已选指标的权重':!weights.every(n=>Number.isFinite(n)&&n>=0&&n<=100)||Math.abs(weights.reduce((x,y)=>x+y,0)-100)>0.001?'当前演示要求客观指标权重合计为100%':'';if(err){$('#form-error').textContent=err;return}st.scheme.includeOptional=includeOptional;st.scheme.weights=weights;st.scheme.name=$('#scheme-name').value.trim();event('总部保存指标与权重');closeModal();render();toast('草稿已保存')}
+else if(cmd==='save-allocation'||cmd==='save-store'){if(!permission('门店服务总监')||st.scheme.stage!==1||!$('#allocation-'+st.scheme.assignments[0].id+'-0'))return;let proposed=st.scheme.assignments.map(p=>({...p,targets:[...p.targets]})),err='';for(let p of proposed){for(let m of selectedMetrics()){let raw=$('#allocation-'+p.id+'-'+m.index).value.trim();if(raw===''&&cmd==='save-store')err=`请填写${p.name}的${m.name}目标`;else if(raw!==''&&!Number.isFinite(Number(raw)))err=`${p.name}的${m.name}目标须为数值`;p.targets[m.index]=raw===''?null:Number(raw);}}if(err){$('#form-error').textContent=err;return}st.scheme.assignments=proposed;if(cmd==='save-store'){st.scheme.assignments.forEach(p=>p.confirmed=false);st.scheme.employeeConfirmed=false;st.scheme.stage=2;delete st.scheme.migrationNotice;event('门店服务总监提交两名员工的个人目标，待 DMS 分别确认')}else event('门店服务总监保存员工目标草稿');closeModal();render();toast(cmd==='save-store'?'已生成员工确认待办':'员工目标草稿已保存')}
+else if(cmd==='dispatch'){if(st.scheme.stage!==0||!permission('总部管理员'))return;st.scheme.stage=1;event('总部下发指标与权重至门店');render();toast('已下发，请切换门店服务总监拆解员工目标')}
+else if(cmd==='employee-confirm'){let p=currentEmployee();if(route().system!=='dms'||st.scheme.stage!==2||p.confirmed)return;p.confirmed=true;let all=confirmedCount()===st.scheme.assignments.length;st.scheme.employeeConfirmed=all;if(all)st.scheme.stage=3;event(p.name+'确认本月方案'+(all?'，全部员工已确认，进入店长审批':''));render();toast(all?'全部员工已确认，进入店长审批':'本人方案已确认并回传')}
+else if(cmd==='approve-detail'){let needed={3:'门店店长',4:'区域售后总监',5:'售后大区审批人'}[st.scheme.stage];if(!needed||role!==needed)return;openModal('审核月度方案',`${steps()}${kv([['门店','武汉光谷店'],['月份','2026-11'],['员工确认',confirmationText()]])}<h3>总部指标与权重</h3>${table(['指标','类型','权重'],selectedMetrics().map(m=>[m.name,m.type,st.scheme.weights[m.index]+'%']))}<h3>门店服务总监分配的个人目标</h3>${allocationTable()}<p class="muted tiny">全员确认后发起审批为当前演示规则，部分未确认的处理待业务确认。退回路径待确认，原型仅支持通过。</p>`,btn('关闭','close')+btn('审批通过','approve','primary'))}
+else if(cmd==='approve'){let needed={3:'门店店长',4:'区域售后总监',5:'售后大区审批人'}[st.scheme.stage];if(!needed||role!==needed||confirmedCount()!==st.scheme.assignments.length)return;st.scheme.stage++;event(role+'审批通过');closeModal();render();toast(st.scheme.stage===6?'月度方案已生效':'已进入下一审批节点')}
+else if(cmd==='reset-filter'){filter={area:'',small:'',city:'',store:'',keyword:'',status:''};pendingFilter={...filter};queryMonth=null;pendingMonth=null;render()}else if(cmd==='query'){pendingFilter.keyword=$('#person-search')?.value.trim()||'';pendingFilter.status=$('#warning-filter')?.value||'';filter={...pendingFilter};pendingMonth=$('#period')?.value||null;queryMonth=pendingMonth;render()}else if(cmd==='only-warning'){filter.status='预警人员';pendingFilter={...filter};render()}
+else if(cmd==='person'){let p=scoped().find(x=>x.id===arg);if(!p)return;openModal('个人执行明细',`${kv([['人员',p.name],['工号',p.id],['门店',p.store],['岗位',p.job],['全国名次',p.rank+' / 10'],['状态',p.warning?'后30%预警':'正常']])}<h3>月度指标</h3>${table(['指标','目标','累计完成','单位'],selectedMetrics().map(m=>[m.name,executionTargets(p)[m.index]??'—（方案未生效）',m.index===0?p.actual:p.name==='李明'?metrics[m.index].actual:p.name==='周然'?[88,136,14][m.index]:'—',m.unit]))}<p class="muted tiny">“—”表示无数据。全国名次不随筛选变化。</p>`)}
+else if(cmd==='edit-evaluation')openModal('录入评价与加扣分',`<p class="sub">李明 · 2026年10月</p><div class="form-grid"><div class="field"><label>服务规范评价（0–10分）*</label><input id="eval-score" type="number" min="0" max="10" step="0.1" value="${st.scheme.score}"></div><div class="field"><label>加扣分（正数加分，负数扣分）*</label><input id="eval-bonus" type="number" step="0.1" value="${st.scheme.bonus}"></div></div><div class="field" style="margin-top:16px"><label>事项说明 *</label><textarea id="eval-note">服务表扬事项，已核实业务依据。</textarea></div><p class="muted tiny">评价人、分值范围及上限待确认。</p><div class="error" id="form-error" role="alert"></div>`,btn('取消','close')+btn('保存','save-eval','primary'));
+else if(cmd==='save-eval'){let score=Number($('#eval-score').value),bonus=Number($('#eval-bonus').value);if($('#eval-score').value===''||score<0||score>10||!Number.isFinite(bonus)||$('#eval-bonus').value===''||!$('#eval-note').value.trim()){$('#form-error').textContent='请填写合法分值及事项说明';return}st.scheme.score=score;st.scheme.bonus=bonus;event('保存评价及加扣分');closeModal();render();toast('已保存')}
+else if(cmd==='publish-result'){if(role!=='总部管理员'||st.result.published)return;st.result.published=true;event('10月结果发布至 DMS');render();toast('结果已发布，员工可在 DMS 查看')}
+else if(cmd==='result-detail')resultDetail();else if(cmd==='confirm-result'){if(route().system!=='dms'||dmsEmployeeId!=='DEMO008'||!st.result.published||st.appeal||st.result.updated||st.result.confirmed)return;st.result.confirmed=true;event('员工确认10月结果');render();toast('结果确认已回传')}
+else if(cmd==='appeal-form'){if(route().system!=='dms'||dmsEmployeeId!=='DEMO008'||st.appeal||st.result.confirmed||st.result.updated||!st.result.published)return;go('dms','appeal-form-'+arg)}else if(cmd==='submit-appeal'){if(route().system!=='dms'||dmsEmployeeId!=='DEMO008'||st.appeal||st.result.updated||st.result.confirmed)return;let val=$('#appeal-value').value,reason=$('#appeal-reason').value.trim();if(!reason||(val!==''&&(Number(val)<0||!Number.isFinite(Number(val))))){$('#phone-error').textContent='请填写申诉说明；完成值须为非负数';return}st.appeal={id:'AP-202610-001',metric:Number(arg),requested:val===''?null:Number(val),reason,file:$('#appeal-file').files[0]?.name||'',stage:0,history:['员工李明提交指标申诉']};event('员工提交指标申诉，待门店汇总');go('dms','appeal');toast('申诉已提交')}
+else if(cmd==='appeal-detail')showAppeal();else if(cmd==='appeal-next'){let a=st.appeal;if(!a||role!==['门店店长','区域售后总监','总部管理员'][a.stage])return;if(a.stage===0){a.stage=1;a.history.push('门店店长汇总并提交区域复核')}else if(a.stage===1){let v=$('#review-value').value,n=$('#review-note').value.trim();if(v===''||Number(v)<0||!n){$('#form-error').textContent='请填写核实完成值和复核说明';return}a.approvedValue=Number(v);a.conclusion=n;a.stage=2;a.history.push('区域复核完成：'+n)}else{a.stage=3;a.history.push('总部确认，更新结果 V2');st.result.updated=true;st.result.version=2;st.result.confirmed=false}event(appealStatus());closeModal();render();toast(a.stage===3?'结果已更新，不再要求员工确认':'已提交下一节点')}
+else if(cmd==='snapshot'){if(role!=='总部管理员'||(!st.result.updated&&!st.result.confirmed)||st.appeal&&st.appeal.stage<3)return;if(st.snapshots.some(x=>x.version===st.result.version)){toast('当前版本已有快照');return}st.snapshots.push({id:'SN-202610-V'+st.result.version,version:st.result.version,score:st.scheme.score,bonus:st.scheme.bonus,actuals:metrics.map((m,i)=>st.result.updated&&st.appeal.metric===i?st.appeal.approvedValue:m.actual)});event('保存10月结果快照');render();toast('已保存月度快照并模拟回传')}
+else if(cmd==='snapshot-detail'){let s=st.snapshots[Number(arg)];openModal('月度快照',`${kv([['编号',s.id],['月份','2026-10'],['版本','V'+s.version]])}<h3>快照结果</h3>${table(['指标','完成值'],metrics.map((m,i)=>[m.name,s.actuals[i]+' '+m.unit]))}<p>主观评价 ${s.score} 分 · 加扣分 ${s.bonus} 分</p><p class="muted tiny">工资结算系统对接属于后续需求，本期不推送。</p>`)}
+else if(cmd==='alert-log')openModal('预警发送记录',`${table(['时间','范围','人数','发送状态'],st.notifications.map(n=>[n.time,n.scope,n.people,tag(n.status,'green')]))}<p class="muted tiny">模拟发送记录，未实际发送。</p>`);
+else if(cmd==='feishu-link'){role='区域售后总监';filter={area:'湖北大区',small:'',city:'',store:'',keyword:'',status:'预警人员'};pendingFilter={...filter};queryMonth=null;pendingMonth=null;go('dmoc','tracking');toast('已打开授权范围内的预警明细')}
+else if(cmd==='metric'){let m=metrics[Number(arg)];openModal('指标配置',`${kv([['指标编码',m.code],['指标名称',m.name],['类型',m.type],['单位',m.unit],['适用岗位','服务顾问'],['数据来源',m.source]])}<h3>计算及取数</h3><div class="readonly">统计口径、取数来源和评分规则由总部与大数据团队确认。</div><h3>权重建议范围</h3><p>拟设单项 0–100%，客观指标权重合计 100%。</p>`)}
+else if(cmd==='new-metric')openModal('新增指标',`<div class="form-grid"><div class="field"><label>指标编码 *</label><input id="new-code" placeholder="例如 AS004"></div><div class="field"><label>指标名称 *</label><input id="new-name" placeholder="输入指标名称"></div><div class="field"><label>指标类型 *</label><select id="new-type">${options(['必选','可选'],'必选')}</select></div><div class="field"><label>单位 *</label><input id="new-unit" placeholder="例如 次"></div></div><p class="muted tiny">新增后保存为草稿，不加入已有方案。</p><div class="error" id="form-error" role="alert"></div>`,btn('取消','close')+btn('保存','save-metric','primary'));
+else if(cmd==='save-metric'){let code=$('#new-code').value.trim(),name=$('#new-name').value.trim(),unit=$('#new-unit').value.trim();if(!code||!name||!unit||metrics.some(m=>m.code===code)){$('#form-error').textContent='请填写完整信息，指标编码不可重复';return}st.extraMetrics=st.extraMetrics||[];st.extraMetrics.push({code,name,unit,type:$('#new-type').value});save();closeModal();toast('指标草稿已保存');render();let t=document.querySelector('tbody');if(false&&t)t.insertAdjacentHTML('beforeend',`<tr><td>${esc(code)}</td><td>${esc(name)}</td><td>${tag(st.extraMetrics.at(-1).type)}</td><td>${esc(unit)}</td><td>待配置</td><td>待映射</td><td>${tag('草稿','gray')}</td><td>待补齐规则</td></tr>`)}
+else if(cmd==='evaluation-rule'||cmd==='bonus-rule')openModal(cmd==='evaluation-rule'?'主观评价规则':'加扣分规则',`<p>${cmd==='evaluation-rule'?'示例评价项：服务规范；示例分值范围0–10分。':'按事项登记加分或扣分，必须说明业务依据。'}</p><p>此类结果不允许申诉。</p><p class="muted tiny">评价人、分值范围、复核与计分规则待确认。</p>`)
+}
+document.addEventListener('click',e=>{let b=e.target.closest('[data-act]');if(b&&!b.disabled)action(b.dataset.act)});document.addEventListener('change',e=>{if(e.target.id==='dms-employee'){if(st.scheme.assignments.some(p=>p.id===e.target.value)){dmsEmployeeId=e.target.value;closeModal();render()}return;}if(e.target.id==='include-optional'){let w=$('#weight-2');w.disabled=!e.target.checked;if(!e.target.checked)w.value=0;else w.value=st.scheme.weights[2]||20;}if(e.target.id==='role'){role=e.target.value;filter={area:'',small:'',city:'',store:'',keyword:'',status:''};pendingFilter={...filter};queryMonth=null;pendingMonth=null;closeModal();render()}if(e.target.dataset.filter){let key=e.target.dataset.filter,order=['area','small','city','store'];pendingFilter.keyword=$('#person-search')?.value.trim()||'';pendingMonth=$('#period')?.value||null;pendingFilter[key]=e.target.value;order.slice(order.indexOf(key)+1).forEach(k=>pendingFilter[k]='');render()}});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.key==='Tab'&&modal){let nodes=[...$('#modal').querySelectorAll('button:not(:disabled),input:not(:disabled),select:not(:disabled),textarea:not(:disabled)')];let first=nodes[0],last=nodes.at(-1);if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault()}else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault()}}});window.addEventListener('hashchange',render);render();
+</script></body></html>
