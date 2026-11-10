@@ -10,11 +10,10 @@
 
 .appeal-reason-cell{display:block;max-width:260px;min-width:180px;white-space:normal;line-height:1.6}
 .phone-content .list-link .tag{white-space:normal;max-width:90px;text-align:center;flex-shrink:0}
-.result-ledger-panel .ledger-actions{align-items:flex-start;flex-direction:column;gap:5px;min-width:104px}
 .result-ledger-panel td{vertical-align:top}
 .result-ledger-panel td small{white-space:nowrap}
-.result-archive-summary{margin:20px 0;padding-top:18px;border-top:1px solid var(--line)}
-.result-archive-summary .archive-error{margin:16px 0 0;background:#fff1f0;color:#a61d24}
+.appeal-change-reason{display:block;min-width:190px;max-width:300px;white-space:normal;line-height:1.6}
+.appeal-changes td{vertical-align:top}
 </style></head><body><div id="app"></div><script>window.FIELD_GROUPS={
   "common": [
     [
@@ -46,12 +45,6 @@
       "日期时间",
       "只读",
       "显示数据方提供的业务数据更新时间。"
-    ],
-    [
-      "结果版本",
-      "V加正整数",
-      "只读",
-      "在结果形成、修订时生成；确认、申诉、归档均关联具体版本。"
     ]
   ],
   "rules": [
@@ -468,34 +461,40 @@
   ],
   "results": [
     [
-      "结果标识／考核月份",
-      "标识／月份",
+      "考核月份",
+      "月份",
       "只读",
-      "拟按员工、考核月份和结果版本定位。"
+      "结果及申诉修改记录均与该员工、该月份关联。"
     ],
     [
-      "人员及组织快照",
-      "工号／门店／岗位",
+      "员工工号／姓名",
+      "文本",
       "只读",
-      "保存考核期内员工所属门店及岗位。"
+      "用于识别结果所属员工，不随当前查询人员切换而串用记录。"
     ],
     [
-      "方案编号／版本",
-      "关联标识",
+      "考核期门店／岗位",
+      "组织／岗位",
       "只读",
-      "关联当期方案及目标、权重。"
+      "保留考核月份所属门店和岗位。"
+    ],
+    [
+      "当期方案关联",
+      "内部标识",
+      "内部关联",
+      "关联当期方案及目标、权重，DMOC结果管理不提供技术版本查看入口。"
     ],
     [
       "客观指标结果",
-      "指标／目标／完成／得分",
+      "指标／目标／完成／单位／得分",
       "只读",
-      "大数据提供指标值；得分按待确认的评分规则计算。"
+      "大数据提供指标值；目标和实际值显示单位，得分按待确认的评分规则计算。"
     ],
     [
       "主观评价项目／分值",
       "项目／数值",
-      "拟必填",
-      "拟由门店服务总监录入；评分人和分值范围待定，不可申诉。"
+      "条件",
+      "拟由门店服务总监在符合条件时录入；历史月份只读，评分人、录入条件及分值范围见 Q01，不可申诉。"
     ],
     [
       "加扣分事项／分值",
@@ -519,7 +518,7 @@
       "员工确认状态／时间",
       "状态／时间",
       "只读",
-      "记录员工对当前版本的确认；申诉更新后无需再次确认。"
+      "记录员工对当期结果的确认；申诉更新后无需再次确认。"
     ],
     [
       "申诉处理状态",
@@ -528,94 +527,52 @@
       "记录申诉所处节点，与员工确认状态分别展示。"
     ],
     [
-      "结果版本／更新原因",
-      "版本／文本",
-      "只读",
-      "拟保留修订前后结果及更新原因。"
-    ],
-    [
       "最终总分",
       "数值或待形成",
       "条件",
       "按评分公式汇总；公式待定。"
     ],
     [
-      "业务定稿状态／时间",
-      "未定稿／已定稿／时间",
+      "申诉修改指标",
+      "指标名称",
       "只读",
-      "建议无异议确认，或该员工当前结果的全部申诉处理完成后自动定稿；正式条件及时点待定，无人工发布或新增审批。"
+      "只展示已处理且确实修改的指标；待处理显示状态，处理完未改值显示结论，不生成修改记录。"
     ],
     [
-      "定稿依据",
-      "确认或申诉处理记录",
+      "修改前值／修改后值",
+      "数值＋单位",
       "只读",
-      "关联具体员工、月份和版本的确认或申诉收口记录；不以业务定稿代替数据归档回执。"
+      "在结果详情并列展示，单位按该指标定义；不得以期望核实值或待确认值充当修改后结果。"
     ],
     [
-      "历史考核月份／结果版本",
-      "月份／版本选择",
+      "修改原因",
+      "文本",
+      "只读",
+      "读取实际处理说明，与该员工、月份、指标的修改记录关联。"
+    ],
+    [
+      "处理时间",
+      "日期时间",
+      "只读",
+      "显示实际完成该项申诉修改的时间。"
+    ],
+    [
+      "历史考核月份",
+      "月份选择",
       "查询条件",
-      "在结果管理查询历史结果及修订前版本，保留当期口径。"
+      "按所选月份读取结果及申诉记录并只读；无记录显示无结果，不回填当前月数据。"
     ],
     [
-      "快照编号",
-      "唯一标识",
-      "只读",
-      "关联考核月份、员工及结果版本；快照生成和传递规则待对接。"
+      "结果列表操作",
+      "查看结果／录入评价",
+      "条件",
+      "仅保留查看及符合条件时的评价录入，历史月份只读；不提供版本或归档入口。"
     ],
     [
-      "快照月份／范围",
-      "月份／组织／人员",
-      "只读",
-      "展示快照对应月份及人员组织范围，不作为人工归档表单。"
-    ],
-    [
-      "结果版本与快照内容",
-      "结果完整快照",
-      "只读",
-      "保存当期方案、目标、权重、人员组织、完成值、评价、加扣分和处理记录；修订不覆盖旧版。"
-    ],
-    [
-      "归档条件满足情况",
-      "未满足／已满足",
-      "只读",
-      "用于解释待归档范围；正式定稿与归档条件、未完成对象处理见 Q06。"
-    ],
-    [
-      "快照生成时间／生成来源",
-      "时间／系统或关联处理人",
-      "只读",
-      "保留快照生成时间及来源记录，不增加 DMOC 人工归档操作。"
-    ],
-    [
-      "DMS同步状态",
-      "待同步／成功／失败",
-      "只读",
-      "记录DMS接收结果；失败不撤销业务结论。"
-    ],
-    [
-      "大数据归档状态",
-      "未满足条件／待归档／已归档／失败",
-      "只读",
-      "建议在结果管理展示，与业务定稿状态独立；归档由大数据完成，收到对应版本成功回执才显示已归档。"
-    ],
-    [
-      "归档批次／归档时间",
-      "批次标识／时间",
-      "只读",
-      "读取大数据回执并关联结果版本及快照；收到成功回执后展示已归档。"
-    ],
-    [
-      "归档回执时间／失败原因",
-      "时间／说明",
-      "只读",
-      "展示最新回执及失败原因；失败不撤销业务定稿，重试及去重规则待对接。"
-    ],
-    [
-      "后续工资结算关联",
-      "人员／月份／版本",
-      "后续",
-      "后续向工资结算系统推送对应绩效数据；本期不做工资核算。"
+      "内部结果标识／版本",
+      "内部关联标识",
+      "内部关联",
+      "用于确认、申诉及数据交接定位，不作为DMOC结果管理的独立字段或控件。"
     ]
   ],
   "appeals": [
@@ -953,7 +910,7 @@ document.addEventListener('change',e=>{
  if(e.target.dataset.filter){let key=e.target.dataset.filter,order=['area','small','city','store'];pendingFilter.keyword=$('#person-search')?.value.trim()||'';pendingMonth=$('#period')?.value||null;pendingFilter[key]=e.target.value;order.slice(order.indexOf(key)+1).forEach(k=>pendingFilter[k]='');render()}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.key==='Tab'&&modal){let nodes=[...$('#modal').querySelectorAll('button:not(:disabled),input:not(:disabled),select:not(:disabled),textarea:not(:disabled)')];let first=nodes[0],last=nodes.at(-1);if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault()}else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault()}}});window.addEventListener('hashchange',render);
-/* Monthly result ledger. Archive receipts are read-only examples owned by the big-data system. */
+/* Monthly results and appeals. Internal ledger records preserve historical data and idempotency. */
 (function () {
   const resultMonth = '2026-10';
   const statusNames = ['待店长汇总', '待区域复核', '待总部确认', '结果已更新'];
@@ -1002,12 +959,18 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.ke
         if (stage >= 1) record.history.push({text: '门店店长汇总并提交区域复核', time: '2026-11-04 09:30'});
         if (stage >= 2) record.history.push({text: '区域复核完成，提交总部确认', time: '2026-11-05 14:20'});
         if (stage === 3) {
-          record.history.push({text: '总部确认，结果更新为 V2', time: '2026-11-06 10:00'});
+          record.processedAt = '2026-11-06 10:00';
+          record.history.push({text: '总部确认，结果更新为 V2', time: record.processedAt});
           item.actual = requested; r.version = 2; r.updated = true; r.confirmed = false;
         }
         return record;
       });
     }
+    // Older V1.3 demos retain their data; only backfill a completed appeal's recorded processing time.
+    st.appealRecords.filter(a => a.stage === 3 && !a.processedAt).forEach(a => {
+      const completed = (a.history || []).slice().reverse().find(h => typeof h === 'object' && h.time && h.text?.includes('总部确认') && h.text?.includes('结果更新'));
+      if (completed) a.processedAt = completed.time;
+    });
     if (!Array.isArray(st.resultHistoryRows)) {
       st.resultHistoryRows = ['DEMO004', 'DEMO008', 'DEMO009'].map(id => {
         const r = copy(st.resultRows.find(x => x.employeeId === id));
@@ -1072,7 +1035,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.ke
   function personFor(id) { return people.find(p => p.id === id); }
   function resultForEmployee(id = dmsEmployeeId) { ensureResults(); return st.resultRows.find(r => r.employeeId === id && r.month === resultMonth); }
   function resultById(id) { ensureResults(); return allResultRows().find(r => r.id === id); }
-  function resultAppeals(r) { return st.appealRecords.filter(a => a.resultId === r.id); }
+  function resultAppeals(r) { return st.appealRecords.filter(a => a.resultId === r.id && a.employeeId === r.employeeId && a.month === r.month); }
   function activeAppeals(r) { return resultAppeals(r).filter(a => a.stage < 3); }
   function statusForResult(r) { return activeAppeals(r).length ? '申诉处理中' : r.updated ? '申诉已更新' : r.confirmed ? '员工已确认' : '待员工确认'; }
   function canViewEmployee(id) { return scoped().some(p => p.id === id); }
@@ -1087,35 +1050,31 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.ke
   function canActOnAppeal(a) { const r = a && st.resultRows.find(x => x.id === a.resultId); return route().system === 'dmoc' && a && a.stage < 3 && r && !r.historical && ledgerFor(r)?.archiveStatus !== '已归档' && r.version === a.originalVersion && role === stageRoles[a.stage] && canViewEmployee(a.employeeId); }
   function historyHtml(a) { return `<div class="timeline">${a.history.map(h => `<div><b>${esc(typeof h === 'string' ? h : h.text)}</b>${typeof h === 'string' ? '' : `<small>${esc(h.time)}</small>`}</div>`).join('')}</div>`; }
   function nowText() { return new Date().toLocaleString('zh-CN', {hour12: false}); }
-  function appendHistory(a, text) { a.history.push({text, time: nowText()}); }
+  function appendHistory(a, text, time = nowText()) { a.history.push({text, time}); }
   function eligibleForConfirmation(r) { return r && !r.historical && !r.confirmed && !r.updated && ledgerFor(r)?.finalState !== '已定稿' && activeAppeals(r).length === 0; }
   function eligibleForAppeal(r) { return eligibleForConfirmation(r) && resultAppeals(r).length === 0; }
   function resultMetricTable(r) { return table(['指标', '类型', '目标', '完成值', '权重'], r.items.map(m => [m.name, tag(m.type, 'gray'), `${m.target} ${m.unit}`, `${m.actual} ${m.unit}`, `${m.weight}%`])); }
   function finalStateTag(record) { return tag(record.finalState, record.finalState === '已定稿' ? 'green' : record.finalState === '申诉处理中' ? 'orange' : 'blue'); }
-  function archiveTag(record) { return tag(record.archiveStatus, record.archiveStatus === '已归档' ? 'green' : record.archiveStatus === '归档失败' ? 'red' : record.archiveStatus === '待归档' ? 'blue' : 'gray'); }
-  function archiveDetails(record) {
-    return `<section class="result-archive-summary">${kv([['最终结果状态', finalStateTag(record)], ['定稿时间', record.finalizedAt || '—'], ['大数据归档状态', archiveTag(record)], ['归档回执时间', record.archiveAt || '—'], ['归档批次', record.archiveBatch || '—'], ['数据说明', '示例回执，未连接大数据']])}${record.archiveError ? `<div class="notice archive-error">${esc(record.archiveError)}</div>` : ''}</section>`;
-  }
-  function ledgerDetail(id) {
-    const r = resultById(id); if (!r || !canViewEmployee(r.employeeId)) return;
-    const p = personFor(r.employeeId), records = st.resultLedger.filter(x => x.resultId === r.id).sort((a, b) => b.version - a.version);
-    openModal('结果版本与归档记录', `${kv([['员工', p.name + ' · ' + p.id], ['经销商（门店）', p.store], ['考核月份', r.month], ['当前结果版本', 'V' + r.version]])}${table(['结果版本', '确认 / 申诉状态', '最终结果状态', '大数据归档', '回执时间 / 批次', '操作'], records.map(x => ['V' + x.version + (x.superseded ? '<small>修订前版本</small>' : '<small>当前版本</small>'), x.confirmationState, finalStateTag(x), archiveTag(x), (x.archiveAt || '—') + `<small>${esc(x.archiveBatch || '—')}</small>`, link('查看记录', 'rp-version:' + x.id)]))}<p class="muted tiny">大数据负责归档，DMOC 留存结果版本并展示回执。历史版本只读，当前版本的处理不会覆盖修订前记录。</p>`, btn('关闭', 'close'));
-  }
-  function versionDetail(id) {
-    const record = st.resultLedger.find(x => x.id === id); if (!record || !canViewEmployee(record.employeeId)) return;
-    const p = personFor(record.employeeId), r = record.snapshot;
-    openModal('月度结果记录 · V' + record.version, `${kv([['记录编号', record.id], ['员工 / 经销商（门店）', p.name + ' / ' + p.store], ['考核月份', record.month], ['确认 / 申诉状态', record.confirmationState]])}${archiveDetails(record)}${record.superseded ? '<div class="notice">此为修订前版本，保留当时数据，仅供查询。</div>' : ''}<h3>记录内的分项结果</h3>${resultMetricTable(r)}<p>主观评价 ${r.score} 分 · 加扣分 ${r.bonus >= 0 ? '+' : ''}${r.bonus} 分</p><h3>结果处理记录</h3>${historyHtml({history: record.events})}${record.appeals.length ? `<h3>关联申诉</h3>${table(['申诉单号', '指标', '本版本留存状态'], record.appeals.map(a => [a.id, a.metricName, statusNames[a.stage]]))}` : ''}`, btn('返回版本记录', 'rp-ledger:' + record.resultId) + btn('关闭', 'close'));
+  function appealChanges(r) {
+    const completed = resultAppeals(r).filter(a => a.stage === 3);
+    if (!completed.length) return '<p class="muted">暂无已完成的申诉修改。</p>';
+    const hasValue = value => value != null && value !== '' && Number.isFinite(Number(value));
+    const changed = completed.filter(a => hasValue(a.originalValue) && hasValue(a.approvedValue) && Number(a.originalValue) !== Number(a.approvedValue));
+    const conclusions = completed.filter(a => !changed.includes(a));
+    const changedTable = changed.length ? `<div class="appeal-changes">${table(['指标', '修改前值', '修改后值', '修改原因', '处理时间'], changed.map(a => [esc(a.metricName), `${esc(a.originalValue)} ${esc(a.unit)}`, `${esc(a.approvedValue)} ${esc(a.unit)}`, `<span class="appeal-change-reason">${esc(a.conclusion || a.reason || '未记录')}</span>`, esc(a.processedAt || '未记录')]))}</div>` : '<p class="muted">暂无已完成的申诉改值记录。</p>';
+    const conclusionTable = conclusions.length ? `<h4>申诉处理结论</h4><div class="appeal-conclusions">${table(['指标', '处理结论', '结果值', '处理原因', '处理时间'], conclusions.map(a => [esc(a.metricName), hasValue(a.approvedValue) && hasValue(a.originalValue) ? '维持原值' : hasValue(a.approvedValue) ? '修改前值未记录' : '结果值未记录', hasValue(a.approvedValue) ? `${esc(a.approvedValue)} ${esc(a.unit)}` : '未记录', `<span class="appeal-change-reason">${esc(a.conclusion || a.reason || '未记录')}</span>`, esc(a.processedAt || '未记录')]))}</div>` : '';
+    return changedTable + conclusionTable;
   }
 
   results = function () {
     const rows = visibleResults(), records = rows.map(ledgerFor);
-    return title('结果管理', '查询月度最终结果、历史版本及大数据归档记录') + filters('results') +
-      stats([['结果人数', rows.length, (queryMonth || resultMonth) + ' · 当前查询月份'], ['待确认 / 申诉中', records.filter(x => x.finalState !== '已定稿').length, '完成确认或申诉后定稿'], ['已定稿', records.filter(x => x.finalState === '已定稿').length, '分项结果已锁定'], ['归档失败', records.filter(x => x.archiveStatus === '归档失败').length, '查看大数据回执']]) +
-      `<section class="panel result-ledger-panel"><div class="toolbar"><div class="panel-title" style="margin:0">月度结果台账</div><div class="actions">${link('查看 9 月历史结果', 'rp-month:2026-09')}${link('查看 10 月结果', 'rp-month:2026-10')}</div></div>${table(['员工 / 工号', '经销商（门店）', '月份 / 版本', '确认 / 申诉状态', '最终结果状态', '大数据归档状态', '回执时间 / 批次', '操作'], rows.map(r => {
-        const p = personFor(r.employeeId), state = statusForResult(r), record = ledgerFor(r);
+    return title('结果管理', '按月份查看员工绩效结果及申诉修改记录') + filters('results') +
+      stats([['总人数', rows.length, (queryMonth || resultMonth) + ' · 当前查询月份'], ['待确认', records.filter(x => x.finalState === '待确认').length, '员工在 DMS 确认'], ['申诉中', records.filter(x => x.finalState === '申诉处理中').length, '查看当前处理进度'], ['已定稿', records.filter(x => x.finalState === '已定稿').length, '已确认或已完成申诉']]) +
+      `<section class="panel result-ledger-panel"><div class="toolbar"><div class="panel-title" style="margin:0">月度绩效结果</div><div class="actions">${link('查看 9 月历史结果', 'rp-month:2026-09')}${link('查看 10 月结果', 'rp-month:2026-10')}</div></div>${table(['员工 / 工号', '经销商（门店）', '考核月份', '结果状态', '操作'], rows.map(r => {
+        const p = personFor(r.employeeId), record = ledgerFor(r);
         const editable = ['总部管理员', '门店服务总监'].includes(role) && eligibleForConfirmation(r);
-        return [p.name + `<small>${p.id}</small>`, p.store, r.month + `<small>V${r.version}</small>`, state, finalStateTag(record), archiveTag(record), (record.archiveAt || '—') + `<small>${esc(record.archiveBatch || '—')}</small>`, `<div class="actions ledger-actions">${link('查看结果', 'rp-detail:' + r.id)}${link('版本及归档记录', 'rp-ledger:' + r.id)}${editable ? link('录入评价', 'rp-evaluation:' + r.id) : ''}</div>`];
-      }))}${pager(rows.length)}<p class="muted tiny">示例按无异议确认或申诉完成自动定稿，归档由大数据执行。正式定稿条件、归档粒度与触发时点待确认；此处归档状态均为只读示例。</p></section>`;
+        return [p.name + `<small>${p.id}</small>`, p.store, r.month, finalStateTag(record), `<div class="actions">${link('查看结果', 'rp-detail:' + r.id)}${editable ? link('录入评价', 'rp-evaluation:' + r.id) : ''}</div>`];
+      }))}${pager(rows.length)}<p class="muted tiny">示例按无异议确认或申诉完成自动定稿；正式定稿条件待确认。历史月份仅供查询。</p></section>`;
   };
 
   appeals = function () {
@@ -1130,9 +1089,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.ke
   };
 
   resultDetail = function (id = activeResultId) {
-    const r = resultById(id); if (!r || !canViewEmployee(r.employeeId)) return;
+    const r = resultById(id); if (route().system !== 'dmoc' || !r || !canViewEmployee(r.employeeId)) return;
     activeResultId = r.id; const p = personFor(r.employeeId);
-    openModal(p.name + '的月度绩效结果', `${kv([['员工', p.name + ' · ' + p.id], ['经销商（门店）', p.store], ['考核月份', r.month], ['结果版本', 'V' + r.version], ['确认 / 申诉状态', statusForResult(r)], ['结果形成时间', r.generatedAt]])}${archiveDetails(ledgerFor(r))}<h3>客观指标</h3>${resultMetricTable(r)}<h3>主观评价与加扣分</h3>${table(['项目', '分值', '说明'], [['主观评价', r.score + ' 分', '不允许申诉'], ['加扣分', (r.bonus >= 0 ? '+' : '') + r.bonus + ' 分', '不允许申诉']])}<p class="sub">${esc(r.evaluationNote)}</p><h3>本月申诉记录</h3>${table(['申诉单号', '指标', '状态', '操作'], resultAppeals(r).map(a => [a.id, a.metricName, tag(statusNames[a.stage], a.stage === 3 ? 'green' : 'orange'), link('查看', 'ap-detail:' + a.id)]))}${r.updated ? '<p class="sub">申诉处理结果已更新，员工仍可查看，不再确认。</p>' : ''}`, btn('版本及归档记录', 'rp-ledger:' + r.id) + btn('关闭', 'close'));
+    const pending = activeAppeals(r), state = finalStateFor(r) === '已定稿' ? '已定稿（' + statusForResult(r) + '）' : finalStateFor(r);
+    openModal(p.name + '的月度绩效结果', `${kv([['员工', p.name + ' · ' + p.id], ['经销商（门店）', p.store], ['考核月份', r.month], ['结果状态', state], ['结果形成时间', r.generatedAt]])}<h3>客观指标</h3>${resultMetricTable(r)}<h3>主观评价与加扣分</h3>${table(['项目', '分值', '说明'], [['主观评价', r.score + ' 分', '不允许申诉'], ['加扣分', (r.bonus >= 0 ? '+' : '') + r.bonus + ' 分', '不允许申诉']])}<p class="sub">${esc(r.evaluationNote)}</p><section class="result-change-records"><h3>申诉修改记录</h3>${appealChanges(r)}</section>${pending.length ? `<h3>处理中申诉</h3>${table(['指标', '申诉说明', '当前状态', '操作'], pending.map(a => [a.metricName, `<span class="appeal-change-reason">${esc(a.reason)}</span>`, tag(statusNames[a.stage], 'orange'), link('查看申诉', 'ap-detail:' + a.id)]))}<p class="muted tiny">申诉尚未处理完成，当前指标完成值未因本次申诉修改。</p>` : ''}${r.updated ? '<p class="sub">申诉处理结果已更新，员工仍可查看，不再确认。</p>' : ''}${r.historical ? '<p class="muted tiny">历史月份结果，仅供查询。</p>' : ''}`, btn('关闭', 'close'));
   };
 
   showAppeal = function (id = activeAppealId) {
@@ -1177,8 +1137,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.ke
     ensureResults(); const [cmd, arg] = a.split(':');
     if (cmd === 'publish-result') return;
     if (cmd === 'result-detail' || cmd === 'rp-detail') { resultDetail(arg || activeResultId || visibleResults()[0]?.id); return; }
-    if (cmd === 'rp-ledger') { if (route().system === 'dmoc') ledgerDetail(arg); return; }
-    if (cmd === 'rp-version') { if (route().system === 'dmoc') versionDetail(arg); return; }
+    if (cmd === 'rp-ledger' || cmd === 'rp-version') return;
     if (cmd === 'rp-month') { if (route().system !== 'dmoc' || !['2026-09', resultMonth].includes(arg)) return; queryMonth = arg; pendingMonth = arg; render(); return; }
     if (cmd === 'appeal-detail' || cmd === 'ap-detail') { showAppeal(arg || activeAppealId || visibleAppeals()[0]?.id); return; }
     if (cmd === 'ap-filter') { appealStageFilter = arg; render(); return; }
@@ -1227,7 +1186,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.ke
         if (!item || record.approvedValue == null) return;
         sealPreviousVersion(r);
         item.actual = record.approvedValue; r.version++; r.updated = true; r.confirmed = false; record.stage = 3;
-        appendHistory(record, '总部确认，结果更新为 V' + r.version);
+        record.processedAt = nowText();
+        appendHistory(record, '总部确认，结果更新为 V' + r.version, record.processedAt);
       }
       syncResultLedger(resultById(record.resultId), record.stage === 3 ? '申诉处理完成，结果定稿' : statusNames[record.stage]);
       event(record.id + '：' + statusNames[record.stage]); closeModal(); render(); toast(record.stage === 3 ? '对应员工结果已更新，无需再次确认' : '已提交下一节点'); return;
